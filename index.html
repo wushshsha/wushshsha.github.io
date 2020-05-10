@@ -114,7 +114,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1，常用命令"><a href="#1，常用命令" class="headerlink" title="1，常用命令"></a>1，常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装的镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 查看已经运行的container</span></span><br><span class="line">docker ps -all</span><br><span class="line"><span class="comment"># 删除镜像 </span></span><br><span class="line">docker rmi ***</span><br><span class="line"><span class="comment"># 删除container</span></span><br><span class="line">docker rm ***</span><br><span class="line"><span class="comment"># docker 帮助命令</span></span><br><span class="line">docker</span><br><span class="line"><span class="comment"># 参考文档</span></span><br><span class="line">https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
+        <h2 id="1，常用命令"><a href="#1，常用命令" class="headerlink" title="1，常用命令"></a>1，常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装的镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 查看已经运行的container</span></span><br><span class="line">docker ps -all</span><br><span class="line"><span class="comment"># 删除镜像 </span></span><br><span class="line">docker rmi ***</span><br><span class="line"><span class="comment"># 删除container</span></span><br><span class="line">docker rm ***</span><br><span class="line"><span class="comment"># docker 帮助命令</span></span><br><span class="line">docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 运行， </span></span><br><span class="line">	<span class="comment">#-d 后台运行， </span></span><br><span class="line">	<span class="comment">#-p 端口映射，前面是外部端口，后面是内部端口 nginx是镜像 </span></span><br><span class="line">	<span class="comment">#--name 给container 起名字</span></span><br><span class="line">	<span class="comment">#-v 文件映射，外面的文件路径和里面的文件路径的映射</span></span><br><span class="line">docker run -d -p 80:80 --name mynginx -v `<span class="built_in">pwd</span>`:/user/share/nginx/html  nginx </span><br><span class="line"></span><br><span class="line"><span class="comment"># 在运行的镜像中执行bash命令</span></span><br><span class="line">docker <span class="built_in">exec</span> -it containrId bash </span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过dockerfile 编译镜像</span></span><br><span class="line">docker build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从仓库拉取推送镜像</span></span><br><span class="line">docker pull nginx</span><br><span class="line">docker push image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器创建镜像 containerId 是运行的镜像id m1为给镜像起的名字</span></span><br><span class="line">docker commit containerId m1 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 将镜像保存为docker tar文件,其中image是要保存的镜像，1.tar为文件名</span></span><br><span class="line">docker save image &gt; 1.tar </span><br><span class="line"></span><br><span class="line"><span class="comment"># 从tar文件加载镜像 1.tar为加载的tar文件名</span></span><br><span class="line">docker load &lt; 1.tar</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker</span><br><span class="line"><span class="comment"># 参考文档</span></span><br><span class="line">https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
 
 <h2 id="2，安装docker"><a href="#2，安装docker" class="headerlink" title="2，安装docker"></a>2，安装docker</h2><ul>
 <li><p>​    mac 安装</p>
@@ -126,11 +126,20 @@
 </ul>
 </li>
 </ul>
+<h2 id="3，dockerfile"><a href="#3，dockerfile" class="headerlink" title="3，dockerfile"></a>3，dockerfile</h2><ul>
+<li><p>创建dockerfile指令 vim Dockerfile</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx</span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> ./ /usr/share/nginx/html/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># image 为镜像名字，. 为dockerfile所在的文件目录</span></span><br><span class="line">docker build -t  image .</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="cka0gvaks000036ji7zs7duet" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="cka0pdo2900007cwb6oladszt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
@@ -187,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/29/linux-cmd/" data-id="cka0gval5000136ji6xx286l7" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/29/linux-cmd/" data-id="cka0pdo5h000j7cwb48w2gy1h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -226,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/markdown/" data-id="cka0gvamc000m36jiat536qlg" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/markdown/" data-id="cka0pdo5j000k7cwb7dmsgqy4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
@@ -366,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/mysql-cmd/" data-id="cka0gvalj000936ji4m7a07kl" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/mysql-cmd/" data-id="cka0pdo3400057cwb3qvr6nwh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
@@ -406,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/php-function/" data-id="cka0gvalf000836jifysnfoyd" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/php-function/" data-id="cka0pdo3600097cwb71odeeds" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li></ul>
@@ -450,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/native-to-aws-s3/" data-id="cka0gvalm000b36ji8tomhnc2" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/native-to-aws-s3/" data-id="cka0pdo3500077cwb2una3b5n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
@@ -498,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/27/lnmn/" data-id="cka0gvalb000436jibdru4jpm" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/27/lnmn/" data-id="cka0pdo3300047cwbbjdzfqhf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -543,7 +552,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/26/hexo-github/" data-id="cka0gvala000336ji36fs4393" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/26/hexo-github/" data-id="cka0pdo2z00037cwb3l4v1sr3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -592,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/26/hello-world/" data-id="cka0gvalc000536jib6ex5pce" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/26/hello-world/" data-id="cka0pdo2n00017cwbdhlac58u" class="article-share-link">Share</a>
       
       
     </footer>
