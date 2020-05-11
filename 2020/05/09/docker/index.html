@@ -30,18 +30,20 @@
   
   <title>docker | 星客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1，常用命令12345678910111213141516171819202122232425262728293031323334353637383940414243# 查看安装的镜像docker images# 查看已经运行的containerdocker ps -all# 删除镜像 docker rmi ***# 删除containerdocker rm ***# docker 帮助命令doc">
+  <meta name="description" content="1，常用命令12345678910111213141516171819202122232425262728293031323334353637383940414243444546# 查看安装的镜像docker images# 查看已经运行的containerdocker ps -all# 停止 containerdocker stop containerID# 删除containerdocker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker">
 <meta property="og:url" content="http://blog.xingke.space/2020/05/09/docker/index.html">
 <meta property="og:site_name" content="星客空间">
-<meta property="og:description" content="1，常用命令12345678910111213141516171819202122232425262728293031323334353637383940414243# 查看安装的镜像docker images# 查看已经运行的containerdocker ps -all# 删除镜像 docker rmi ***# 删除containerdocker rm ***# docker 帮助命令doc">
+<meta property="og:description" content="1，常用命令12345678910111213141516171819202122232425262728293031323334353637383940414243444546# 查看安装的镜像docker images# 查看已经运行的containerdocker ps -all# 停止 containerdocker stop containerID# 删除containerdocker">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.xingke.space/2020/05/09/docker/docker.png">
 <meta property="article:published_time" content="2020-05-09T15:05:48.000Z">
-<meta property="article:modified_time" content="2020-05-10T08:32:10.594Z">
+<meta property="article:modified_time" content="2020-05-10T13:53:26.418Z">
 <meta property="article:author" content="wushshsha">
 <meta property="article:tag" content="docker">
+<meta property="article:tag" content="lnmp">
+<meta property="article:tag" content="docker-compose">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://blog.xingke.space/2020/05/09/docker/docker.png">
   
@@ -114,7 +116,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1，常用命令"><a href="#1，常用命令" class="headerlink" title="1，常用命令"></a>1，常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装的镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 查看已经运行的container</span></span><br><span class="line">docker ps -all</span><br><span class="line"><span class="comment"># 删除镜像 </span></span><br><span class="line">docker rmi ***</span><br><span class="line"><span class="comment"># 删除container</span></span><br><span class="line">docker rm ***</span><br><span class="line"><span class="comment"># docker 帮助命令</span></span><br><span class="line">docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 运行， </span></span><br><span class="line">	<span class="comment">#-d 后台运行， </span></span><br><span class="line">	<span class="comment">#-p 端口映射，前面是外部端口，后面是内部端口 nginx是镜像 </span></span><br><span class="line">	<span class="comment">#--name 给container 起名字</span></span><br><span class="line">	<span class="comment">#-v 文件映射，外面的文件路径和里面的文件路径的映射</span></span><br><span class="line">docker run -d -p 80:80 --name mynginx -v `<span class="built_in">pwd</span>`:/user/share/nginx/html  nginx </span><br><span class="line"></span><br><span class="line"><span class="comment"># 在运行的镜像中执行bash命令</span></span><br><span class="line">docker <span class="built_in">exec</span> -it containrId bash </span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过dockerfile 编译镜像</span></span><br><span class="line">docker build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从仓库拉取推送镜像</span></span><br><span class="line">docker pull nginx</span><br><span class="line">docker push image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器创建镜像 containerId 是运行的镜像id m1为给镜像起的名字</span></span><br><span class="line">docker commit containerId m1 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 将镜像保存为docker tar文件,其中image是要保存的镜像，1.tar为文件名</span></span><br><span class="line">docker save image &gt; 1.tar </span><br><span class="line"></span><br><span class="line"><span class="comment"># 从tar文件加载镜像 1.tar为加载的tar文件名</span></span><br><span class="line">docker load &lt; 1.tar</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker</span><br><span class="line"><span class="comment"># 参考文档</span></span><br><span class="line">https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
+        <h2 id="1，常用命令"><a href="#1，常用命令" class="headerlink" title="1，常用命令"></a>1，常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装的镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 查看已经运行的container</span></span><br><span class="line">docker ps -all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 container</span></span><br><span class="line">docker stop containerID</span><br><span class="line"><span class="comment"># 删除container</span></span><br><span class="line">docker rm ***</span><br><span class="line"><span class="comment"># 删除镜像 </span></span><br><span class="line">docker rmi ***</span><br><span class="line"><span class="comment"># docker 帮助命令</span></span><br><span class="line">docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 运行， </span></span><br><span class="line">	<span class="comment">#-d 后台运行， </span></span><br><span class="line">	<span class="comment">#-p 端口映射，前面是外部端口，后面是内部端口 nginx是镜像 </span></span><br><span class="line">	<span class="comment">#--name 给container 起名字</span></span><br><span class="line">	<span class="comment">#-v 文件映射，外面的文件路径和里面的文件路径的映射</span></span><br><span class="line">docker run -d -p 80:80 --name mynginx -v `<span class="built_in">pwd</span>`:/user/share/nginx/html  nginx </span><br><span class="line"></span><br><span class="line"><span class="comment"># 在运行的镜像中执行bash命令</span></span><br><span class="line">docker <span class="built_in">exec</span> -it containrId bash </span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过dockerfile 编译镜像</span></span><br><span class="line">docker build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从仓库拉取推送镜像</span></span><br><span class="line">docker pull nginx</span><br><span class="line">docker push image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器创建镜像 containerId 是运行的镜像id m1为给镜像起的名字</span></span><br><span class="line">docker commit containerId m1 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 将镜像保存为docker tar文件,其中image是要保存的镜像，1.tar为文件名</span></span><br><span class="line">docker save image &gt; 1.tar </span><br><span class="line"></span><br><span class="line"><span class="comment"># 从tar文件加载镜像 1.tar为加载的tar文件名</span></span><br><span class="line">docker load &lt; 1.tar</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker</span><br><span class="line"><span class="comment"># 参考文档</span></span><br><span class="line">https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
 
 <h2 id="2，安装docker"><a href="#2，安装docker" class="headerlink" title="2，安装docker"></a>2，安装docker</h2><ul>
 <li><p>​    mac 安装</p>
@@ -140,10 +142,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="cka0su4fi0000rnwbfgb7guhv" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="cka1wkklx00020ewbg3avf958" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li></ul>
 
     </footer>
   </div>
@@ -182,7 +184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
     </div>
   </div>
 
@@ -192,7 +194,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/php/" style="font-size: 20px;">php</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a>
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a>
     </div>
   </div>
 
@@ -214,6 +216,10 @@
       <ul>
         
           <li>
+            <a href="/2020/05/10/docker-compose/">docker-compose</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/10/dockerfile/">dockerfile</a>
           </li>
         
@@ -227,10 +233,6 @@
         
           <li>
             <a href="/2020/04/28/markdown/">markdown</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/28/mysql-cmd/">mysql 常用命令</a>
           </li>
         
       </ul>
