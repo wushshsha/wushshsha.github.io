@@ -92,6 +92,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/11/nginx/" class="article-date">
+  <time datetime="2020-05-11T03:46:49.000Z" itemprop="datePublished">2020-05-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/11/nginx/">nginx</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1，匹配规则-以openresty为例，可以使用echo库"><a href="#1，匹配规则-以openresty为例，可以使用echo库" class="headerlink" title="1，匹配规则,以openresty为例，可以使用echo库"></a>1，匹配规则,以openresty为例，可以使用echo库</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-steam;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line">    <span class="attribute">default_type</span> text/html;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"hello nginx"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> = /a &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"=/a"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span><span class="regexp"> ^~</span> /a &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"^~ /a"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span><span class="regexp"> ^~</span> /a/b &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"^~ /a/b"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> <span class="regexp">~ ^/[a-z]</span>&#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"~ ^/[a-z]"</span></span><br><span class="line">    &#125;</span><br><span class="line">    location <span class="regexp">~ ^/\w</span>&#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"~ ^/\w"</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2，配置反向代理"><a href="#2，配置反向代理" class="headerlink" title="2，配置反向代理"></a>2，配置反向代理</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-steam;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line">    <span class="attribute">default_type</span> text/html;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"hello world"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> /a/ &#123;</span><br><span class="line">      <span class="attribute">proxy_pass</span> http://yourdomain:80/;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3，负载均衡配置"><a href="#3，负载均衡配置" class="headerlink" title="3，负载均衡配置"></a>3，负载均衡配置</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-steam;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">upstream</span> group1&#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.12:80</span> weight=<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.12:81</span> weight=<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line">    <span class="attribute">default_type</span> text/html;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"hello world"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> /a/ &#123;</span><br><span class="line">      <span class="attribute">proxy_pass</span> http://yourdomain:80/;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 负载均衡</span></span><br><span class="line">    <span class="attribute">location</span> /b/ &#123;</span><br><span class="line">      <span class="attribute">proxy_pass</span> http://group1/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/05/11/nginx/" data-id="cka24b24p000djowb2gf76xkj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-docker-compose" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/10/docker-compose/" class="article-date">
@@ -169,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/10/docker-compose/" data-id="cka1wpgge0001fzwb5m2agias" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/10/docker-compose/" data-id="cka24b23h0000jowbcnnpebdc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
@@ -209,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/10/dockerfile/" data-id="cka1wpggi0003fzwbfw3v498p" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/10/dockerfile/" data-id="cka24b2480004jowb5o5vfz9e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
@@ -243,7 +287,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1，常用命令"><a href="#1，常用命令" class="headerlink" title="1，常用命令"></a>1，常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装的镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 查看已经运行的container</span></span><br><span class="line">docker ps -all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 container</span></span><br><span class="line">docker stop containerID</span><br><span class="line"><span class="comment"># 删除container</span></span><br><span class="line">docker rm ***</span><br><span class="line"><span class="comment"># 删除镜像 </span></span><br><span class="line">docker rmi ***</span><br><span class="line"><span class="comment"># docker 帮助命令</span></span><br><span class="line">docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 运行， </span></span><br><span class="line">	<span class="comment">#-d 后台运行， </span></span><br><span class="line">	<span class="comment">#-p 端口映射，前面是外部端口，后面是内部端口 nginx是镜像 </span></span><br><span class="line">	<span class="comment">#--name 给container 起名字</span></span><br><span class="line">	<span class="comment">#-v 文件映射，外面的文件路径和里面的文件路径的映射</span></span><br><span class="line">docker run -d -p 80:80 --name mynginx -v `<span class="built_in">pwd</span>`:/user/share/nginx/html  nginx </span><br><span class="line"></span><br><span class="line"><span class="comment"># 在运行的镜像中执行bash命令</span></span><br><span class="line">docker <span class="built_in">exec</span> -it containrId bash </span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过dockerfile 编译镜像</span></span><br><span class="line">docker build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从仓库拉取推送镜像</span></span><br><span class="line">docker pull nginx</span><br><span class="line">docker push image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器创建镜像 containerId 是运行的镜像id m1为给镜像起的名字</span></span><br><span class="line">docker commit containerId m1 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 将镜像保存为docker tar文件,其中image是要保存的镜像，1.tar为文件名</span></span><br><span class="line">docker save image &gt; 1.tar </span><br><span class="line"></span><br><span class="line"><span class="comment"># 从tar文件加载镜像 1.tar为加载的tar文件名</span></span><br><span class="line">docker load &lt; 1.tar</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker</span><br><span class="line"><span class="comment"># 参考文档</span></span><br><span class="line">https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
+        <h2 id="1，常用命令"><a href="#1，常用命令" class="headerlink" title="1，常用命令"></a>1，常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装的镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 查看已经运行的container</span></span><br><span class="line">docker ps -all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 container</span></span><br><span class="line">docker stop containerID</span><br><span class="line"><span class="comment"># 删除container</span></span><br><span class="line">docker rm ***</span><br><span class="line"><span class="comment"># 删除镜像 </span></span><br><span class="line">docker rmi ***</span><br><span class="line"><span class="comment"># docker 帮助命令</span></span><br><span class="line">docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 运行， </span></span><br><span class="line">	<span class="comment">#-d 后台运行， </span></span><br><span class="line">	<span class="comment">#-p 端口映射，前面是外部端口，后面是内部端口 nginx是镜像 </span></span><br><span class="line">	<span class="comment">#--name 给container 起名字</span></span><br><span class="line">	<span class="comment">#-v 文件映射，外面的文件路径和里面的文件路径的映射</span></span><br><span class="line">docker run -d -p 80:80 --name mynginx -v `<span class="built_in">pwd</span>`:/user/share/nginx/html  nginx </span><br><span class="line"></span><br><span class="line"><span class="comment"># 在运行的镜像中执行bash命令</span></span><br><span class="line">docker <span class="built_in">exec</span> -it containrId bash </span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过dockerfile 编译镜像</span></span><br><span class="line">docker build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从仓库拉取推送镜像</span></span><br><span class="line">docker pull nginx</span><br><span class="line">docker push image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器创建镜像 containerId 是运行的镜像id m1为给镜像起的名字</span></span><br><span class="line">docker commit containerId m1 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 将镜像保存为docker tar文件,其中image是要保存的镜像，1.tar为文件名</span></span><br><span class="line">docker save image &gt; 1.tar </span><br><span class="line"></span><br><span class="line"><span class="comment"># 从tar文件加载镜像 1.tar为加载的tar文件名</span></span><br><span class="line">docker load &lt; 1.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看container 的log信息</span></span><br><span class="line">docker logs -f containerId</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker</span><br><span class="line"><span class="comment"># 参考文档</span></span><br><span class="line">https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
 
 <h2 id="2，安装docker"><a href="#2，安装docker" class="headerlink" title="2，安装docker"></a>2，安装docker</h2><ul>
 <li><p>​    mac 安装</p>
@@ -269,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="cka1wpgg10000fzwbex2scia9" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="cka24b23w0001jowb6e2wanwh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li></ul>
@@ -326,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/29/linux-cmd/" data-id="cka1wpggo0007fzwb5a000p8h" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/29/linux-cmd/" data-id="cka24b24l000ajowbgtuydbdn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -365,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/markdown/" data-id="cka1wpggp0008fzwb61iiba8z" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/markdown/" data-id="cka24b24t000ijowb9l21a50g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
@@ -505,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/mysql-cmd/" data-id="cka1wpggw000bfzwb975o23hk" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/mysql-cmd/" data-id="cka24b24o000cjowbc7kohhmb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
@@ -545,7 +589,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/php-function/" data-id="cka1wpgh2000ffzwbaubrhlwa" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/php-function/" data-id="cka24b24r000gjowbfbwp08d5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li></ul>
@@ -589,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/native-to-aws-s3/" data-id="cka1wpggz000dfzwb3pn20uwd" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/28/native-to-aws-s3/" data-id="cka24b24q000fjowbaah4enkb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
@@ -637,52 +681,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/27/lnmn/" data-id="cka1wpggv000afzwb8grzgyez" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hexo-github" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/26/hexo-github/" class="article-date">
-  <time datetime="2020-04-26T09:25:49.000Z" itemprop="datePublished">2020-04-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/26/hexo-github/">hexo 创建博客部署到github上</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1，准备环境"><a href="#1，准备环境" class="headerlink" title="1，准备环境"></a>1，准备环境</h2><p>首先打开github，点击New repository，创建一个新仓库，仓库名必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README。</p>
-<h2 id="2，安装hexo"><a href="#2，安装hexo" class="headerlink" title="2，安装hexo"></a>2，安装hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g --registry=https://registry.npm.taobao.org</span><br><span class="line">mkdir hexo</span><br><span class="line"><span class="built_in">cd</span> hexo</span><br><span class="line">hexo init</span><br><span class="line">hexo install --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装部署到github的插件</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-部署到github"><a href="#3-部署到github" class="headerlink" title="3, 部署到github"></a>3, 部署到github</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成静态文件</span></span><br><span class="line">hexo g </span><br><span class="line"><span class="comment">#启动服务，可以在浏览器中查看</span></span><br><span class="line">hexo s</span><br><span class="line"><span class="comment">#部署到github中</span></span><br><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<h2 id="4，创建自定义域名"><a href="#4，创建自定义域名" class="headerlink" title="4，创建自定义域名"></a>4，创建自定义域名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">source</span>/</span><br><span class="line"><span class="comment">#在source目录下创建自定义域名文件CNAME，直接输入youdomain.com</span></span><br><span class="line">vi CNAME</span><br><span class="line"><span class="comment">#保存域名</span></span><br><span class="line"><span class="comment">#自定义域名部署到gihtub</span></span><br><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<h2 id="5，发布文章"><a href="#5，发布文章" class="headerlink" title="5，发布文章"></a>5，发布文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="built_in">test</span></span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/26/hexo-github/" data-id="cka1wpggm0005fzwb9kr9cwle" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/27/lnmn/" data-id="cka24b24c0008jowbepfcgyr2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -710,7 +709,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
     </div>
   </div>
 
@@ -720,7 +719,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a>
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a>
     </div>
   </div>
 
@@ -742,6 +741,10 @@
       <ul>
         
           <li>
+            <a href="/2020/05/11/nginx/">nginx</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/10/docker-compose/">docker-compose</a>
           </li>
         
@@ -755,10 +758,6 @@
         
           <li>
             <a href="/2020/04/29/linux-cmd/">linux_cmd</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/28/markdown/">markdown</a>
           </li>
         
       </ul>
