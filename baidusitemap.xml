@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.xingke.space/2020/05/19/node-path-url/</loc>
+    <lastmod>2020-05-19</lastmod>
+  </url>  <url>
+    <loc>http://blog.xingke.space/2020/05/17/ts-config/</loc>
+    <lastmod>2020-05-19</lastmod>
+  </url>  <url>
+    <loc>http://blog.xingke.space/2020/04/26/hexo-github/</loc>
+    <lastmod>2020-05-19</lastmod>
+  </url>  <url>
     <loc>http://blog.xingke.space/2020/05/12/react-hook/</loc>
     <lastmod>2020-05-12</lastmod>
   </url>  <url>
@@ -38,9 +47,6 @@
     <lastmod>2020-04-28</lastmod>
   </url>  <url>
     <loc>http://blog.xingke.space/2020/04/27/lnmn/</loc>
-    <lastmod>2020-04-28</lastmod>
-  </url>  <url>
-    <loc>http://blog.xingke.space/2020/04/26/hexo-github/</loc>
     <lastmod>2020-04-28</lastmod>
   </url>  <url>
     <loc>http://blog.xingke.space/2020/04/26/hello-world/</loc>

@@ -28,19 +28,19 @@
 
         
   
-  <title>Tag: markdown | 星客空间</title>
+  <title>node路径相关数据 | 星客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="星客的博客空间">
-<meta property="og:type" content="website">
-<meta property="og:title" content="星客空间">
-<meta property="og:url" content="http://blog.xingke.space/tags/markdown/index.html">
+  <meta name="description" content="1,path.join 中的跨平台输出结果不一致，这个需要注意12345&#x2F;&#x2F; node 中path模块&#x2F;&#x2F;join 函数会根据平台自动拼接路径path.join(&#39;&#x2F;srv&#x2F;www&#39;,&#39;hello&#39;,&#39;world&#39;) 	&#x2F;&#x2F; linux 下输出 &#x2F;srv&#x2F;www&#x2F;hello&#x2F;world    ，是斜杠	&#x2F;&#x2F; win32 下输出 \srv\www\hello\world    ，是反斜杠  2，de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node路径相关数据">
+<meta property="og:url" content="http://blog.xingke.space/2020/05/19/node-path-url/index.html">
 <meta property="og:site_name" content="星客空间">
-<meta property="og:description" content="星客的博客空间">
+<meta property="og:description" content="1,path.join 中的跨平台输出结果不一致，这个需要注意12345&#x2F;&#x2F; node 中path模块&#x2F;&#x2F;join 函数会根据平台自动拼接路径path.join(&#39;&#x2F;srv&#x2F;www&#39;,&#39;hello&#39;,&#39;world&#39;) 	&#x2F;&#x2F; linux 下输出 &#x2F;srv&#x2F;www&#x2F;hello&#x2F;world    ，是斜杠	&#x2F;&#x2F; win32 下输出 \srv\www\hello\world    ，是反斜杠  2，de">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-19T08:10:00.000Z">
+<meta property="article:modified_time" content="2020-05-19T08:42:17.291Z">
 <meta property="article:author" content="wushshsha">
-<meta property="article:tag" content="技术">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="文档">
+<meta property="article:tag" content="nodejs">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
@@ -90,40 +90,57 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/28/markdown/" class="archive-article-date">
-  <time datetime="2020-04-28T09:23:20.000Z" itemprop="datePublished">4月 28</time>
+        <section id="main"><article id="post-node-path-url" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/19/node-path-url/" class="article-date">
+  <time datetime="2020-05-19T08:10:00.000Z" itemprop="datePublished">2020-05-19</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/28/markdown/">markdown</a>
+    <h1 class="article-title" itemprop="name">
+      node路径相关数据
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-path-join-中的跨平台输出结果不一致，这个需要注意"><a href="#1-path-join-中的跨平台输出结果不一致，这个需要注意" class="headerlink" title="1,path.join 中的跨平台输出结果不一致，这个需要注意"></a>1,path.join 中的跨平台输出结果不一致，这个需要注意</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node 中path模块</span></span><br><span class="line"><span class="comment">//join 函数会根据平台自动拼接路径</span></span><br><span class="line">path.join(<span class="string">'/srv/www'</span>,<span class="string">'hello'</span>,<span class="string">'world'</span>) </span><br><span class="line">	<span class="comment">// linux 下输出 /srv/www/hello/world    ，是斜杠</span></span><br><span class="line">	<span class="comment">// win32 下输出 \srv\www\hello\world    ，是反斜杠</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="2，decodeURI，-encodeURI"><a href="#2，decodeURI，-encodeURI" class="headerlink" title="2，decodeURI， encodeURI"></a>2，decodeURI， encodeURI</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"http://www.baidu.com/hello world"</span>;</span><br><span class="line"><span class="keyword">let</span> decodeStr = <span class="built_in">decodeURI</span>(str) </span><br><span class="line"><span class="built_in">console</span>.log(decodeStr) <span class="comment">//这个输出结果是  http://www.baidu.com/hello%20world</span></span><br><span class="line"><span class="keyword">let</span> encodeStr = <span class="built_in">encodeURI</span>(decodeStr)   </span><br><span class="line"><span class="built_in">console</span>.log(encodeStr)<span class="comment">// 这个输出结果是  http://www.baidu.com/hello world</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/05/19/node-path-url/" data-id="ckado60f6000gn2wbdoephh71" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/17/ts-config/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ts config 配置说明</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

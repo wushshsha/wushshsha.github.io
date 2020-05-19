@@ -92,6 +92,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-node-path-url" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/19/node-path-url/" class="article-date">
+  <time datetime="2020-05-19T08:10:00.000Z" itemprop="datePublished">2020-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/19/node-path-url/">node路径相关数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-path-join-中的跨平台输出结果不一致，这个需要注意"><a href="#1-path-join-中的跨平台输出结果不一致，这个需要注意" class="headerlink" title="1,path.join 中的跨平台输出结果不一致，这个需要注意"></a>1,path.join 中的跨平台输出结果不一致，这个需要注意</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node 中path模块</span></span><br><span class="line"><span class="comment">//join 函数会根据平台自动拼接路径</span></span><br><span class="line">path.join(<span class="string">'/srv/www'</span>,<span class="string">'hello'</span>,<span class="string">'world'</span>) </span><br><span class="line">	<span class="comment">// linux 下输出 /srv/www/hello/world    ，是斜杠</span></span><br><span class="line">	<span class="comment">// win32 下输出 \srv\www\hello\world    ，是反斜杠</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2，decodeURI，-encodeURI"><a href="#2，decodeURI，-encodeURI" class="headerlink" title="2，decodeURI， encodeURI"></a>2，decodeURI， encodeURI</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"http://www.baidu.com/hello world"</span>;</span><br><span class="line"><span class="keyword">let</span> decodeStr = <span class="built_in">decodeURI</span>(str) </span><br><span class="line"><span class="built_in">console</span>.log(decodeStr) <span class="comment">//这个输出结果是  http://www.baidu.com/hello%20world</span></span><br><span class="line"><span class="keyword">let</span> encodeStr = <span class="built_in">encodeURI</span>(decodeStr)   </span><br><span class="line"><span class="built_in">console</span>.log(encodeStr)<span class="comment">// 这个输出结果是  http://www.baidu.com/hello world</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/05/19/node-path-url/" data-id="ckado60f6000gn2wbdoephh71" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ts-config" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/17/ts-config/" class="article-date">
+  <time datetime="2020-05-17T14:13:19.000Z" itemprop="datePublished">2020-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/17/ts-config/">ts config 配置说明</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-生成配置文件"><a href="#1-生成配置文件" class="headerlink" title="1,生成配置文件"></a>1,生成配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc --init</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-配置文件说明-–-tsconfig-json"><a href="#2-配置文件说明-–-tsconfig-json" class="headerlink" title="2,配置文件说明 – tsconfig.json"></a>2,配置文件说明 – tsconfig.json</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="comment">/* Basic Options */</span></span><br><span class="line">    <span class="string">"target"</span>: <span class="string">"es5"</span>,                          <span class="comment">/*用于指定编译后的目标版本 Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="string">"module"</span>: <span class="string">"commonjs"</span>,                     <span class="comment">/*用来指定要使用的目标版本 Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */</span></span><br><span class="line">    <span class="comment">// "lib": [],                             /*用于指定要包含在编译中的库文件，比如es6，dom Specify library files to be included in the compilation. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// "allowJs": true,                       /*用来指定是否编译js文件，默认为false，不编译 Allow javascript files to be compiled. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// "checkJs": true,                       /*用来指定是否检测和报告js中的错误，默认为false Report errors in .js files. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// "jsx": "preserve",                     /*指定jsx代码用于的开发环境 Specify JSX code generation: 'preserve', 'react-native', or 'react'. */</span></span><br><span class="line">    <span class="comment">// "declaration": true,                   /*用来指定是否在编译的时候生成声明文件.d.ts，但declaration 和allowjs 不能同时设置为true。 Generates corresponding '.d.ts' file. */</span></span><br><span class="line">    <span class="comment">// "declarationMap": true,                /*用来指定是否为声明文件.d.ts 生成map文件 Generates a sourcemap for each corresponding '.d.ts' file. */</span></span><br><span class="line">    <span class="comment">// "sourceMap": true,                     /*用来指定编译时是否生成map文件 Generates corresponding '.map' file. */</span></span><br><span class="line">    <span class="comment">// "outFile": "./",                       /*用来指定将输出文件合并为一个文件，比如设置为"./dist/main.js",则输出的文件为一个main.js文件，但要注意的是只有设置module的值为amd和system模块时才支持这个配置 Concatenate and emit output to single file. */</span></span><br><span class="line">    <span class="comment">// "outDir": "./",                        /*用来指定输出文件存放的文件夹路径 Redirect output structure to the directory. */</span></span><br><span class="line">    <span class="comment">// "rootDir": "./",                       /*用来指定编译文件的根目录，编译器会在根目录查找入口文件，如果编译器发现以rootDir的值作为根目录查找入口文件并不会把所有文件加载进去的话会报错，但不会停止项目编译。 Specify the root directory of input files. Use to control the output directory structure with --outDir. */</span></span><br><span class="line">    <span class="comment">// "composite": true,                     /*是否编译构建引用项目。 Enable project compilation */</span></span><br><span class="line">    <span class="comment">// "removeComments": true,                /*是否在编译后的文件中把注释删掉 Do not emit comments to output. */</span></span><br><span class="line">    <span class="comment">// "noEmit": true,                        /*不生成编译文件，这个一般很少用 Do not emit outputs. */</span></span><br><span class="line">    <span class="comment">// "importHelpers": true,                 /*指定是否引入tslib里面的辅助工具函数，默认为false Import emit helpers from 'tslib'. */</span></span><br><span class="line">    <span class="comment">// "downlevelIteration": true,            /*当target为"es5"或"es3"时，为迭代器"for-of"等提供完全支持， Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */</span></span><br><span class="line">    <span class="comment">// "isolatedModules": true,               /*指定是否将每个文件作为单独的模块，默认为true，他不能和declaration同时设定 Transpile each file as a separate module (similar to 'ts.transpileModule'). */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Strict Type-Checking Options */</span></span><br><span class="line">    <span class="string">"strict"</span>: <span class="literal">true</span>,                           <span class="comment">/*如果设置为true，则开启所有的严格性检查 Enable all strict type-checking options. */</span></span><br><span class="line">    <span class="comment">// "noImplicitAny": true,                 /*如果设置为false，当我们没有明确指定类型时，编译器默认这个值为any类型，如果设置为true，则没有设置明确的类型就会报错，默认为false Raise error on expressions and declarations with an implied 'any' type. */</span></span><br><span class="line">    <span class="comment">// "strictNullChecks": true,              /*如果设置为true，null和undefined值不能赋值给非这两种类型的值，别的类型的值也不能赋给他们，除了any类型，还有个例外就是undefined可以赋值给void类型。 Enable strict null checks. */</span></span><br><span class="line">    <span class="comment">// "strictFunctionTypes": true,           /*用来指定是否使用函数参数双向协变。 Enable strict checking of function types. */</span></span><br><span class="line">    <span class="comment">// "strictBindCallApply": true,           /*是否对bind，call和apply绑定的方法的参数严格检查 Enable strict 'bind', 'call', and 'apply' methods on functions. */</span></span><br><span class="line">    <span class="comment">// "strictPropertyInitialization": true,  /*设置为true会检查类的非undefined属性是否已经在构建函数里面初始化，如果开启也需要设置strictNullChecks 也为true， 默认为false。 Enable strict checking of property initialization in classes. */</span></span><br><span class="line">    <span class="comment">// "noImplicitThis": true,                /*当this的值为any类型，会报错 Raise error on 'this' expressions with an implied 'any' type. */</span></span><br><span class="line">    <span class="comment">// "alwaysStrict": true,                  /*指定始终以严格的模式检查每个模块，并且在生成的js文件中会包含"use strict" Parse in strict mode and emit "use strict" for each source file. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Additional Checks */</span></span><br><span class="line">    <span class="comment">// "noUnusedLocals": true,                /*是否检查有定义但没有使用的变量，对于这一点的检查，使用eslint 可以在你书写的时候做提示，可以配合使用，默认为false。 Report errors on unused locals. */</span></span><br><span class="line">    <span class="comment">// "noUnusedParameters": true,            /*检查函数中是否有定义的参数没有用，也可以配合eslint Report errors on unused parameters. */</span></span><br><span class="line">    <span class="comment">// "noImplicitReturns": true,             /*检查函数是否有返回值，没有的话就会报错， Report error when not all code paths in function return a value. */</span></span><br><span class="line">    <span class="comment">// "noFallthroughCasesInSwitch": true,    /*检查switch语句中case是否用break跳出 Report errors for fallthrough cases in switch statement. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Module Resolution Options */</span></span><br><span class="line">    <span class="comment">// "moduleResolution": "node",            /*用于选择模块解析测量。 Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */</span></span><br><span class="line">    <span class="comment">// "baseUrl": "./",                       /*用户设置解析非相对模块名称的根目录，相对模块不受影响。 Base directory to resolve non-absolute module names. */</span></span><br><span class="line">    <span class="comment">// "paths": &#123;</span></span><br><span class="line">    <span class="comment">//   "*": ["node_modules/@types", "src/typings"]  </span></span><br><span class="line">    <span class="comment">//&#125;,                           /*用于设定模块名基于baseUrl的路径映射. A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */</span></span><br><span class="line">    <span class="comment">// "rootDirs": [],                        /*可以指定一个路径列表，在构建时编译器会将这个路径列表中的路径中的内容都放在一个文件中。 List of root folders whose combined content represents the structure of the project at runtime. */</span></span><br><span class="line">    <span class="comment">// "typeRoots": [],                       /*用来指定声明文件或文件夹的路径列表，如果指定了此项，，则只有这里列出的声明文件才会被加载。 List of folders to include type definitions from. */</span></span><br><span class="line">    <span class="comment">// "types": [],                           /*用来指定需要包含的模块，只有在这里列出来的模块的声明文件才会被加载进来。 Type declaration files to be included in compilation. */</span></span><br><span class="line">    <span class="comment">// "allowSyntheticDefaultImports": true,  /*用来指定允许从没有默认导出的模块中导入。 Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */</span></span><br><span class="line">    <span class="string">"esModuleInterop"</span>: <span class="literal">true</span>                   <span class="comment">/*通过为导入内容创建命名空间，实现CommonJs和ES模块之间的互操作性。 Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */</span></span><br><span class="line">    <span class="comment">// "preserveSymlinks": true,              /*不把符号链接解析为真实路径，具体可以参考webpack和nodejs的symlink相关知识 Do not resolve the real path of symlinks. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Source Map Options */</span></span><br><span class="line">    <span class="comment">// "sourceRoot": "",                      /*用于指定调试器应该找到Typescrit文件而不是源文件，这个值会被写进.map文件。 Specify the location where debugger should locate TypeScript files instead of source locations. */</span></span><br><span class="line">    <span class="comment">// "mapRoot": "",                         /*用于指定调试器找到映射文件而非生成文件到位置，指定map文件的根路径，该选项会影响.map文件中的sources属性。 Specify the location where debugger should locate map files instead of generated locations. */</span></span><br><span class="line">    <span class="comment">// "inlineSourceMap": true,               /*是否将map文件中的内容和js文件编译在同一个文件中。 Emit a single file with source maps instead of having a separate file. */</span></span><br><span class="line">    <span class="comment">// "inlineSources": true,                 /*是否进一步将ts文件的内容也包含到输出文件中。 Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Experimental Options */</span></span><br><span class="line">    <span class="comment">// "experimentalDecorators": true,        /*用于指定是否启用实验性的装饰器特性。 Enables experimental support for ES7 decorators. */</span></span><br><span class="line">    <span class="comment">// "emitDecoratorMetadata": true,         /*用于指定是否为装饰器提供元数据支持，关于元数据，也是ES6的新标准，可以通过Reflect提供的静态方法获取元数据，如果需要使用Reflect的一些方法，需要引入ES2015.Reflect这个库。 Enables experimental support for emitting type metadata for decorators. */</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// "files":[], /*fils 可以配置一个数组列表，里面包含指定文件的相对或绝对路径，编译器在编译的时候，只会编译包含砸files中列出的文件。如果不指定，则取决于有没有设置include选项，如果没有include选项，则默认惠编译根目录以及所有子目录中的文件。这里列出的路径必须是指定文件，而不是某个文件夹，并且不能使用通配符，比如 * ? */</span></span><br><span class="line">  <span class="comment">// "include":[],/* include 也可以指定要编译的路径列表，但和files的区别在于，这里的路径可以是文件或文件夹，可以使用相对或绝对路径，可以使用通配符， 例如，"./src"即表示要编译的src文件下的所有文件以及子文件夹的文件*/</span></span><br><span class="line">  <span class="comment">// "exclude":[], /*规则和include 是一样的，这里表示的是要排除编译的文件或文件夹 */</span></span><br><span class="line">  <span class="comment">// "extends":"", /* extends 可以指定一个其他的tsconfig.json文件路径，来继承这个配置文件里的配置，继承来的文件的配置惠覆盖当前文件的配置*/</span></span><br><span class="line">  <span class="comment">// "compileOnSave":true, /*如果设置为true，我们在编辑了项目文件保存的时候，编译器会根据tsconfig.json的配置重新生成文件，不过这个需要编译器支持*/</span></span><br><span class="line">  <span class="comment">// references: []， // 指定要引用的项目，    </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/05/17/ts-config/" data-id="ckado60fd000pn2wbbgwr3syi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-react-hook" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/12/react-hook/" class="article-date">
@@ -149,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/12/react-hook/" data-id="cka3ugph7000hl2ji86rher58" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/12/react-hook/" data-id="ckado60fa000kn2wb7h5wdy4m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li></ul>
@@ -199,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/11/react/" data-id="cka3ugphc000kl2ji4fjs2aa4" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/11/react/" data-id="ckado60fd000rn2wb5zow6bx8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
@@ -264,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/11/webpack/" data-id="cka3ugpi30015l2jif3tyazfg" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/11/webpack/" data-id="ckado60fg000un2wbbmkdhje1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
@@ -308,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/11/nginx/" data-id="cka3ugph4000dl2ji9jmvcan0" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/11/nginx/" data-id="ckado60f5000fn2wbaa2m7kb4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li></ul>
@@ -397,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/10/docker-compose/" data-id="cka3ugpga0000l2jid8l27vqz" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/10/docker-compose/" data-id="ckado60ed0000n2wb5wx395xv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
@@ -437,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/10/dockerfile/" data-id="cka3ugpgn0003l2ji17307vvr" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/10/dockerfile/" data-id="ckado60ew0004n2wb15hgfuck" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
@@ -497,7 +581,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="cka3ugpi50016l2jif2qm2zie" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="ckado60el0001n2wb7b2h1ayl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li></ul>
@@ -554,189 +638,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/29/linux-cmd/" data-id="cka3ugpgy0008l2ji00054kbf" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/29/linux-cmd/" data-id="ckado60f2000an2wb7axf0443" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-markdown" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/28/markdown/" class="article-date">
-  <time datetime="2020-04-28T09:23:20.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/markdown/">markdown</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>转载：<a href="https://www.jianshu.com/p/ebe52d2d468f" target="_blank" rel="noopener">https://www.jianshu.com/p/ebe52d2d468f</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/markdown/" data-id="cka3ugpgz0009l2jif8kje1bk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mysql-cmd" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/28/mysql-cmd/" class="article-date">
-  <time datetime="2020-04-28T08:21:02.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/mysql-cmd/">mysql 常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1、连接Mysql"><a href="#1、连接Mysql" class="headerlink" title="1、连接Mysql"></a>1、连接Mysql</h1><p>格式： mysql -h主机地址 -u用户名 －p用户密码</p>
-<p><strong>1、连接到本机上的MYSQL。</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h localhost -u user -p password</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、退出MYSQL命令</strong>： exit （回车）</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2、用户相关操作"><a href="#2、用户相关操作" class="headerlink" title="2、用户相关操作"></a>2、用户相关操作</h1><ol>
-<li>进入到mysql数据库下</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>对新用户增删改</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1.创建用户:</span><br><span class="line"># 指定ip：192.118.1.1的mjj用户登录</span><br><span class="line">create user &#39;alex&#39;@&#39;192.118.1.1&#39; identified by &#39;123&#39;;</span><br><span class="line"># 指定ip：192.118.1.开头的mjj用户登录</span><br><span class="line">create user &#39;alex&#39;@&#39;192.118.1.%&#39; identified by &#39;123&#39;;</span><br><span class="line"># 指定任何ip的mjj用户登录</span><br><span class="line">create user &#39;alex&#39;@&#39;%&#39; identified by &#39;123&#39;;</span><br><span class="line"></span><br><span class="line">2.删除用户</span><br><span class="line">drop user &#39;用户名&#39;@&#39;IP地址&#39;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.修改用户</span><br><span class="line">rename user &#39;用户名&#39;@&#39;IP地址&#39; to &#39;新用户名&#39;@&#39;IP地址&#39;;</span><br><span class="line"></span><br><span class="line">4.修改密码</span><br><span class="line">set password for &#39;用户名&#39;@&#39;IP地址&#39;&#x3D;Password(&#39;新密码&#39;);</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>对当前的用户授权管理</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#查看权限</span><br><span class="line">show grants for &#39;用户&#39;@&#39;IP地址&#39;</span><br><span class="line"></span><br><span class="line">#授权 mjj用户仅对db1.t1文件有查询、插入和更新的操作</span><br><span class="line">grant select ,insert,update on db1.t1 to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line"></span><br><span class="line"># 表示有所有的权限，除了grant这个命令，这个命令是root才有的。mjj用户对db1下的t1文件有任意操作</span><br><span class="line">grant all privileges  on db1.t1 to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line">#mjj用户对db1数据库中的文件执行任何操作</span><br><span class="line">grant all privileges  on db1.* to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line">#mjj用户对所有数据库中文件有任何操作</span><br><span class="line">grant all privileges  on *.*  to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line"> </span><br><span class="line">#取消权限</span><br><span class="line"> </span><br><span class="line"># 取消mjj用户对db1的t1文件的任意操作</span><br><span class="line">revoke all on db1.t1 from &#39;alex&#39;@&quot;%&quot;;  </span><br><span class="line"></span><br><span class="line"># 取消来自远程服务器的mjj用户对数据库db1的所有表的所有权限</span><br><span class="line"></span><br><span class="line">revoke all on db1.* from &#39;alex&#39;@&quot;%&quot;;  </span><br><span class="line"></span><br><span class="line">取消来自远程服务器的mjj用户所有数据库的所有的表的权限</span><br><span class="line">revoke all privileges on *.* from &#39;alex&#39;@&#39;%&#39;;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>MySql备份命令行操作</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 备份：数据表结构+数据</span><br><span class="line">mysqdump -u root db1 &gt; db1.sql -p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 备份：数据表结构</span><br><span class="line">mysqdump -u root -d db1 &gt; db1.sql -p</span><br><span class="line"></span><br><span class="line">#导入现有的数据到某个数据库</span><br><span class="line">#1.先创建一个新的数据库</span><br><span class="line">create database db10;</span><br><span class="line"># 2.将已有的数据库文件导入到db10数据库中</span><br><span class="line">mysqdump -u root -d db10 &lt; db1.sql -p</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="3、数据库相关操作"><a href="#3、数据库相关操作" class="headerlink" title="3、数据库相关操作"></a>3、数据库相关操作</h1><ol>
-<li><p>创建数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database &#96;mydb&#96; character set utf8 collate utf8_general_ci;</span><br><span class="line">create database &#96;mydb&#96; character set utf8mb4 collate utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>显示数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>切换到数据库 (xingke)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use xingke</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除数据库（xingke）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database xingke;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h1 id="4、表相关操作"><a href="#4、表相关操作" class="headerlink" title="4、表相关操作"></a>4、表相关操作</h1><h2 id="4-1，创建表"><a href="#4-1，创建表" class="headerlink" title="4.1，创建表"></a>4.1，创建表</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>以下为创建MySQL数据表的SQL通用语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name (column_name column_type);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>以下例子中我们将在 RUNOOB 数据库中创建数据表runoob_tbl：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS &#96;runoob_tbl&#96;(</span><br><span class="line">   &#96;runoob_id&#96; INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   &#96;runoob_title&#96; VARCHAR(100) NOT NULL,</span><br><span class="line">   &#96;runoob_author&#96; VARCHAR(40) NOT NULL,</span><br><span class="line">   &#96;submission_date&#96; DATE,</span><br><span class="line">   PRIMARY KEY ( &#96;runoob_id&#96; )</span><br><span class="line">)ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8;</span><br></pre></td></tr></table></figure>
-
-<p>实例解析：</p>
-<ul>
-<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
-<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
-<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
-<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>以下为创建数据表 runoob_tbl 实例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; CREATE TABLE runoob_tbl(</span><br><span class="line">   -&gt; runoob_id INT NOT NULL AUTO_INCREMENT,</span><br><span class="line">   -&gt; runoob_title VARCHAR(100) NOT NULL,</span><br><span class="line">   -&gt; runoob_author VARCHAR(40) NOT NULL,</span><br><span class="line">   -&gt; submission_date DATE,</span><br><span class="line">   -&gt; PRIMARY KEY ( runoob_id )</span><br><span class="line">   -&gt; )ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8;</span><br><span class="line">Query OK, 0 rows affected (0.16 sec)</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-2，添加数据"><a href="#4-2，添加数据" class="headerlink" title="4.2，添加数据"></a>4.2，添加数据</h2><h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><p>以下为向MySQL数据表插入数据通用的 <strong>INSERT INTO</strong> SQL语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
-
-<p>如果数据是字符型，必须使用单引号或者双引号，如：”value”。</p>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>以下实例中我们将向 runoob_tbl 表插入三条数据:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p password;</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl </span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;学习 PHP&quot;, &quot;菜鸟教程&quot;, NOW());</span><br><span class="line">Query OK, 1 rows affected, 1 warnings (0.01 sec)</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl</span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;学习 MySQL&quot;, &quot;菜鸟教程&quot;, NOW());</span><br><span class="line">Query OK, 1 rows affected, 1 warnings (0.01 sec)</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl</span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;JAVA 教程&quot;, &quot;RUNOOB.COM&quot;, &#39;2016-05-06&#39;);</span><br><span class="line">Query OK, 1 rows affected (0.00 sec)</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-3-修改数据"><a href="#4-3-修改数据" class="headerlink" title="4.3 修改数据"></a>4.3 修改数据</h2><h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><p>以下是 UPDATE 命令修改 MySQL 数据表数据的通用 SQL 语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1&#x3D;new-value1, field2&#x3D;new-value2</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>你可以同时更新一个或多个字段。</li>
-<li>你可以在 WHERE 子句中指定任何条件。</li>
-<li>你可以在一个单独表中同时更新数据。</li>
-</ul>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE runoob_tbl SET runoob_title&#x3D;&#39;学习 C++&#39; WHERE runoob_id&#x3D;3;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-4-查询数据"><a href="#4-4-查询数据" class="headerlink" title="4.4 查询数据"></a>4.4 查询数据</h2><h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><p>以下为在MySQL数据库中查询数据通用的 SELECT 语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE Clause]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。</li>
-<li>SELECT 命令可以读取一条或者多条记录。</li>
-<li>你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据</li>
-<li>你可以使用 WHERE 语句来包含任何条件。</li>
-<li>你可以使用 LIMIT 属性来设定返回的记录数。</li>
-<li>你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。</li>
-</ul>
-<h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from runoob_tbl;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-5-删除表"><a href="#4-5-删除表" class="headerlink" title="4.5 删除表"></a>4.5 删除表</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><p>以下为删除MySQL数据表的通用语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h3><p>以下实例删除了数据表runoob_tbl:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE runoob_tbl;</span><br></pre></td></tr></table></figure>
-
-<h1 id="5、数据导入导出"><a href="#5、数据导入导出" class="headerlink" title="5、数据导入导出"></a>5、数据导入导出</h1><h2 id="5-1-导出"><a href="#5-1-导出" class="headerlink" title="5.1 导出"></a>5.1 导出</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据库导出</span></span><br><span class="line">mysqldump -u user -p  databases &gt; name.sql</span><br><span class="line"><span class="comment">#数据库导入</span></span><br><span class="line"><span class="built_in">source</span> /home/abc/abc.sql;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-2导入"><a href="#5-2导入" class="headerlink" title="5.2导入"></a>5.2导入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;home&#x2F;abc&#x2F;abc.sql;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/28/mysql-cmd/" data-id="cka3ugph3000cl2jihi4vgu2w" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
 
     </footer>
   </div>
@@ -763,7 +668,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
     </div>
   </div>
 
@@ -773,7 +678,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
     </div>
   </div>
 
@@ -795,6 +700,14 @@
       <ul>
         
           <li>
+            <a href="/2020/05/19/node-path-url/">node路径相关数据</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/17/ts-config/">ts config 配置说明</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/12/react-hook/">react hook使用简介</a>
           </li>
         
@@ -804,14 +717,6 @@
         
           <li>
             <a href="/2020/05/11/webpack/">webpack</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/11/nginx/">nginx</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/10/docker-compose/">docker-compose</a>
           </li>
         
       </ul>

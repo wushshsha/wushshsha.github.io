@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.xingke.space/2020/05/19/node-path-url/</loc>
+    
+    <lastmod>2020-05-19T08:42:17.291Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.xingke.space/2020/05/17/ts-config/</loc>
+    
+    <lastmod>2020-05-19T03:23:17.872Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.xingke.space/2020/04/26/hexo-github/</loc>
+    
+    <lastmod>2020-05-19T03:23:17.855Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.xingke.space/2020/05/12/react-hook/</loc>
     
     <lastmod>2020-05-12T11:40:39.457Z</lastmod>
@@ -89,13 +110,6 @@
     <loc>http://blog.xingke.space/2020/04/27/lnmn/</loc>
     
     <lastmod>2020-04-28T04:27:31.200Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.xingke.space/2020/04/26/hexo-github/</loc>
-    
-    <lastmod>2020-04-28T04:27:31.199Z</lastmod>
     
   </url>
   
