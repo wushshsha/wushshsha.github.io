@@ -92,6 +92,77 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-paypal-ipn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/21/paypal-ipn/" class="article-date">
+  <time datetime="2020-05-21T08:06:22.000Z" itemprop="datePublished">2020-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/21/paypal-ipn/">paypal sanbox 开发环境搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1，-paypal"><a href="#1，-paypal" class="headerlink" title="1， paypal"></a>1， paypal</h2><ul>
+<li><p><a href="https://developer.paypal.com/" target="_blank" rel="noopener">https://developer.paypal.com/</a> 注册开发者账号</p>
+</li>
+<li><p>创建sandbox测试账号</p>
+<p><img src="/2020/05/21/paypal-ipn/hello-world.png" alt=""></p>
+</li>
+<li><p><a href="https://sandbox.paypal.com/" target="_blank" rel="noopener">https://sandbox.paypal.com/</a> 登陆上面创建的商户收款账号</p>
+</li>
+<li><p>配置ipn 通知,按照图片中的 1，2，3，4顺序点击</p>
+<p><img src="/2020/05/21/paypal-ipn/ipn-complete-config-1.png" alt=""></p>
+<p>点击图片中4的更新按钮跳转到如下界面</p>
+<p><img src="/2020/05/21/paypal-ipn/F443A688-E8D3-41C2-9C92-6793C98B9AAB.png" alt=""></p>
+<p>编辑后保存</p>
+</li>
+<li><p>配置支付成功后跳转到的页面地址</p>
+<p><img src="/2020/05/21/paypal-ipn/17EEC82C-D3D4-4F19-953C-D7F3778426E3.png" alt=""></p>
+<p>点击上图中2的更新按钮，到如下界面</p>
+<p><img src="/2020/05/21/paypal-ipn/D7BD3271-D9FE-4243-AC04-38AE614A8956.png" alt=""></p>
+<p>保存，配置完成</p>
+</li>
+</ul>
+<p>2，服务器接口实现，需要实现两个页面，一个是支付完成回调页面，一个是支付完成后跳转到的页面，以php为例</p>
+<ul>
+<li><p>支付完成页面 </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// Read POST data</span></span><br><span class="line"><span class="comment">// reading posted data directly from $_POST causes serialization</span></span><br><span class="line"><span class="comment">// issues with array data in POST. Reading raw POST data from input stream instead.</span></span><br><span class="line">$raw_post_data = file_get_contents(<span class="string">'php://input'</span>);</span><br><span class="line">$raw_post_array = explode(<span class="string">'&amp;'</span>, $raw_post_data);</span><br><span class="line">$myPost = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span> ($raw_post_array <span class="keyword">as</span> $keyval) &#123;</span><br><span class="line">        $keyval = explode (<span class="string">'='</span>, $keyval);</span><br><span class="line">        <span class="keyword">if</span> (count($keyval) == <span class="number">2</span>)</span><br><span class="line">                $myPost[$keyval[<span class="number">0</span>]] = urldecode($keyval[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// read the post from PayPal system and add 'cmd'</span></span><br><span class="line">$req = <span class="string">'cmd=_notify-validate'</span>;</span><br><span class="line"><span class="keyword">if</span>(function_exists(<span class="string">'get_magic_quotes_gpc'</span>)) &#123;</span><br><span class="line">        $get_magic_quotes_exists = <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span> ($myPost <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">        <span class="keyword">if</span>($get_magic_quotes_exists == <span class="keyword">true</span> &amp;&amp; get_magic_quotes_gpc() == <span class="number">1</span>) &#123;</span><br><span class="line">                $value = urlencode(stripslashes($value));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                $value = urlencode($value);</span><br><span class="line">        &#125;</span><br><span class="line">        $req .= <span class="string">"&amp;$key=$value"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$paypal_url = <span class="string">"https://www.sandbox.paypal.com/cgi-bin/webscr"</span>;</span><br><span class="line"></span><br><span class="line">$ch = curl_init($paypal_url);</span><br><span class="line"><span class="keyword">if</span> ($ch == <span class="keyword">FALSE</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);</span><br><span class="line">curl_setopt($ch, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER,<span class="number">1</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_POSTFIELDS, $req);</span><br><span class="line">curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="number">1</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="number">2</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_FORBID_REUSE, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, <span class="number">30</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(<span class="string">'Connection: Close'</span>));</span><br><span class="line"></span><br><span class="line">$res = curl_exec($ch);</span><br><span class="line"><span class="keyword">if</span> (curl_errno($ch) != <span class="number">0</span>) <span class="comment">// cURL error</span></span><br><span class="line">&#123;</span><br><span class="line">    curl_close($ch);</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    curl_close($ch);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>支付完成跳转页面</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$pp_hostname = <span class="string">"www.sandbox.paypal.com"</span>; <span class="comment">// Change to www.sandbox.paypal.com to test against sandbox</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// read the post from PayPal system and add 'cmd'</span></span><br><span class="line">$req = <span class="string">'cmd=_notify-synch'</span>;</span><br><span class="line">$tx_token = $_GET[<span class="string">'tx'</span>];</span><br><span class="line">$auth_token = <span class="string">"3mvGvAGSpgXGCIv0DIdKhZAEArNuYd9N8dfLbP05Bydcps6XeBWLVBryFyC"</span>;<span class="comment">//这个数据是在支付完成配置页面设置的有数据</span></span><br><span class="line">$req .= <span class="string">"&amp;tx=$tx_token&amp;at=$auth_token"</span>;</span><br><span class="line"> </span><br><span class="line">$ch = curl_init();</span><br><span class="line">curl_setopt($ch, CURLOPT_URL, <span class="string">"https://$pp_hostname/cgi-bin/webscr"</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER,<span class="number">1</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_POSTFIELDS, $req);</span><br><span class="line">curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="number">1</span>);</span><br><span class="line"><span class="comment">//set cacert.pem verisign certificate path in curl using 'CURLOPT_CAINFO' field here,</span></span><br><span class="line"><span class="comment">//if your server does not bundled with default verisign certificates.</span></span><br><span class="line">curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="number">2</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(<span class="string">"Host: $pp_hostname"</span>));</span><br><span class="line">$res = curl_exec($ch);</span><br><span class="line">curl_close($ch);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/05/21/paypal-ipn/" data-id="ckagkk4ca000k8uwb18bpccfd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-node-path-url" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/19/node-path-url/" class="article-date">
@@ -122,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/19/node-path-url/" data-id="ckado60f6000gn2wbdoephh71" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/19/node-path-url/" data-id="ckagkk4c3000g8uwbbg599nve" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
@@ -164,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/17/ts-config/" data-id="ckado60fd000pn2wbbgwr3syi" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/17/ts-config/" data-id="ckagkk4ce000p8uwbaz3z40fg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li></ul>
@@ -233,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/12/react-hook/" data-id="ckado60fa000kn2wb7h5wdy4m" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/12/react-hook/" data-id="ckagkk4cf000r8uwbf93z534m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li></ul>
@@ -283,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/11/react/" data-id="ckado60fd000rn2wb5zow6bx8" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/11/react/" data-id="ckagkk4ci000u8uwb34at2xcn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
@@ -348,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/11/webpack/" data-id="ckado60fg000un2wbbmkdhje1" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/11/webpack/" data-id="ckagkk4d7000v8uwb201b7p9g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
@@ -392,7 +463,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/11/nginx/" data-id="ckado60f5000fn2wbaa2m7kb4" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/11/nginx/" data-id="ckagkk4bz000f8uwb289eg6ah" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li></ul>
@@ -481,7 +552,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/10/docker-compose/" data-id="ckado60ed0000n2wb5wx395xv" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/10/docker-compose/" data-id="ckagkk4af00008uwb8c8f8isj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
@@ -521,7 +592,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/10/dockerfile/" data-id="ckado60ew0004n2wb15hgfuck" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/10/dockerfile/" data-id="ckagkk4bc00058uwb7dlm4g77" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
@@ -581,67 +652,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="ckado60el0001n2wb7b2h1ayl" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/09/docker/" data-id="ckagkk4as00018uwbercu14es" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-linux-cmd" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/29/linux-cmd/" class="article-date">
-  <time datetime="2020-04-29T08:08:26.000Z" itemprop="datePublished">2020-04-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/linux-cmd/">linux_cmd</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>tar 压缩 ，解压</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将文件 srcFile 压缩 target.tar.gz</span></span><br><span class="line">tar -czf target.tar.gz srcFile</span><br><span class="line"><span class="comment">#将文件解压</span></span><br><span class="line">tar -xzvf  srcFile</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>远程拷贝文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将本地文件 target  拷贝到 root@tar.com</span></span><br><span class="line">scp target  root@tar.com:~/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>linux 版本号查询</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># linux 版本号</span></span><br><span class="line">cat /proc/version</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 版本号查询</span></span><br><span class="line">cat /etc/issue</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/29/linux-cmd/" data-id="ckado60f2000an2wb7axf0443" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -668,7 +682,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
     </div>
   </div>
 
@@ -678,7 +692,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 10px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
     </div>
   </div>
 
@@ -700,6 +714,10 @@
       <ul>
         
           <li>
+            <a href="/2020/05/21/paypal-ipn/">paypal sanbox 开发环境搭建</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/19/node-path-url/">node路径相关数据</a>
           </li>
         
@@ -713,10 +731,6 @@
         
           <li>
             <a href="/2020/05/11/react/">react</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/11/webpack/">webpack</a>
           </li>
         
       </ul>
