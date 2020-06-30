@@ -28,19 +28,19 @@
 
         
   
-  <title>hexo 创建博客部署到github上 | 星客空间</title>
+  <title>归档: 2020/6 | 星客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1，准备环境首先打开github，点击New repository，创建一个新仓库，仓库名必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README。 2，安装hexo12345678npm install hexo -g --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taoba">
-<meta property="og:type" content="article">
-<meta property="og:title" content="hexo 创建博客部署到github上">
-<meta property="og:url" content="http://blog.xingke.space/2020/04/26/hexo-github/index.html">
+  <meta name="description" content="星客的博客空间">
+<meta property="og:type" content="website">
+<meta property="og:title" content="星客空间">
+<meta property="og:url" content="http://blog.xingke.space/archives/2020/06/index.html">
 <meta property="og:site_name" content="星客空间">
-<meta property="og:description" content="1，准备环境首先打开github，点击New repository，创建一个新仓库，仓库名必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README。 2，安装hexo12345678npm install hexo -g --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taoba">
+<meta property="og:description" content="星客的博客空间">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-26T09:25:49.000Z">
-<meta property="article:modified_time" content="2020-05-19T03:23:17.855Z">
 <meta property="article:author" content="wushshsha">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="文档">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
@@ -90,71 +90,40 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hexo-github" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/26/hexo-github/" class="article-date">
-  <time datetime="2020-04-26T09:25:49.000Z" itemprop="datePublished">2020-04-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      hexo 创建博客部署到github上
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/06/30/react-render/" class="archive-article-date">
+  <time datetime="2020-06-30T08:42:48.000Z" itemprop="datePublished">6月 30</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/06/30/react-render/">react-render</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1，准备环境"><a href="#1，准备环境" class="headerlink" title="1，准备环境"></a>1，准备环境</h2><p>首先打开github，点击New repository，创建一个新仓库，仓库名必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README。</p>
-<h2 id="2，安装hexo"><a href="#2，安装hexo" class="headerlink" title="2，安装hexo"></a>2，安装hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g --registry=https://registry.npm.taobao.org</span><br><span class="line">mkdir hexo</span><br><span class="line"><span class="built_in">cd</span> hexo</span><br><span class="line">hexo init</span><br><span class="line">hexo install --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装部署到github的插件</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-部署到github"><a href="#3-部署到github" class="headerlink" title="3, 部署到github"></a>3, 部署到github</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成静态文件</span></span><br><span class="line">hexo g </span><br><span class="line"><span class="comment">#启动服务，可以在浏览器中查看</span></span><br><span class="line">hexo s</span><br><span class="line"><span class="comment">#部署到github中</span></span><br><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<h2 id="4，创建自定义域名"><a href="#4，创建自定义域名" class="headerlink" title="4，创建自定义域名"></a>4，创建自定义域名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">source</span>/</span><br><span class="line"><span class="comment">#在source目录下创建自定义域名文件CNAME，直接输入youdomain.com</span></span><br><span class="line">vi CNAME</span><br><span class="line"><span class="comment">#保存域名</span></span><br><span class="line"><span class="comment">#自定义域名部署到gihtub</span></span><br><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<h2 id="5，发布文章"><a href="#5，发布文章" class="headerlink" title="5，发布文章"></a>5，发布文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="built_in">test</span></span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/26/hexo-github/" data-id="ckc1pn0360008lxwbgglna4jw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2020/04/27/lnmn/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          ubuntu lnmn 安装
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/04/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
 
 </section>
         
