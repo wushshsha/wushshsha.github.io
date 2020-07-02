@@ -28,19 +28,19 @@
 
         
   
-  <title>归档: 2020 | 星客空间</title>
+  <title>mysql8 修改用户密码登陆模式 | 星客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="星客的博客空间">
-<meta property="og:type" content="website">
-<meta property="og:title" content="星客空间">
-<meta property="og:url" content="http://blog.xingke.space/archives/2020/page/2/index.html">
+  <meta name="description" content="修改mysql 密码登陆模式—mysql_native_password在node.js 中报错如下：  Client does not support authentication protocol requested by server; consider upgrading MySQL client 123use mysql;ALTER USER &#39;root&#39;@&#39;lo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql8 修改用户密码登陆模式">
+<meta property="og:url" content="http://blog.xingke.space/2020/06/25/mysql-passmode/index.html">
 <meta property="og:site_name" content="星客空间">
-<meta property="og:description" content="星客的博客空间">
+<meta property="og:description" content="修改mysql 密码登陆模式—mysql_native_password在node.js 中报错如下：  Client does not support authentication protocol requested by server; consider upgrading MySQL client 123use mysql;ALTER USER &#39;root&#39;@&#39;lo">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-25T08:31:16.000Z">
+<meta property="article:modified_time" content="2020-07-02T09:01:36.359Z">
 <meta property="article:author" content="wushshsha">
-<meta property="article:tag" content="技术">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="文档">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
@@ -90,216 +90,66 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/11/webpack/" class="archive-article-date">
-  <time datetime="2020-05-11T07:03:52.000Z" itemprop="datePublished">5月 11</time>
+        <section id="main"><article id="post-mysql-passmode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/25/mysql-passmode/" class="article-date">
+  <time datetime="2020-06-25T08:31:16.000Z" itemprop="datePublished">2020-06-25</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/11/webpack/">webpack</a>
+    <h1 class="article-title" itemprop="name">
+      mysql8 修改用户密码登陆模式
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/11/nginx/" class="archive-article-date">
-  <time datetime="2020-05-11T03:46:49.000Z" itemprop="datePublished">5月 11</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/11/nginx/">nginx</a>
-    </h1>
-  
+        <h2 id="修改mysql-密码登陆模式—mysql-native-password"><a href="#修改mysql-密码登陆模式—mysql-native-password" class="headerlink" title="修改mysql 密码登陆模式—mysql_native_password"></a>修改mysql 密码登陆模式—mysql_native_password</h2><p>在node.js 中报错如下：</p>
+<p> Client does not support authentication protocol requested by server; consider upgrading MySQL client</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;password&#39;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/10/docker-compose/" class="archive-article-date">
-  <time datetime="2020-05-10T11:58:52.000Z" itemprop="datePublished">5月 10</time>
-</a>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/10/docker-compose/">docker-compose</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/10/dockerfile/" class="archive-article-date">
-  <time datetime="2020-05-10T06:56:19.000Z" itemprop="datePublished">5月 10</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/06/25/mysql-passmode/" data-id="ckc4mk5y7000g0nwb3wrr3wp7" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/10/dockerfile/">dockerfile</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/09/docker/" class="archive-article-date">
-  <time datetime="2020-05-09T15:05:48.000Z" itemprop="datePublished">5月 9</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/09/docker/">docker</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/30/react-render/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于父子组件渲染，以及 memo高阶组件的使用区别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/21/paypal-ipn/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">paypal sandbox 开发环境搭建</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/29/linux-cmd/" class="archive-article-date">
-  <time datetime="2020-04-29T08:08:26.000Z" itemprop="datePublished">4月 29</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/29/linux-cmd/">linux_cmd</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/28/markdown/" class="archive-article-date">
-  <time datetime="2020-04-28T09:23:20.000Z" itemprop="datePublished">4月 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/28/markdown/">markdown</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/28/mysql-cmd/" class="archive-article-date">
-  <time datetime="2020-04-28T08:21:02.000Z" itemprop="datePublished">4月 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/28/mysql-cmd/">mysql 常用命令</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/28/php-function/" class="archive-article-date">
-  <time datetime="2020-04-28T08:02:09.000Z" itemprop="datePublished">4月 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/28/php-function/">php 常用函数备注</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/28/native-to-aws-s3/" class="archive-article-date">
-  <time datetime="2020-04-28T04:29:33.000Z" itemprop="datePublished">4月 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/28/native-to-aws-s3/">把本地文件上传到s3上</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/2020/">&amp;laquo; 上一页</a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2020/page/3/">3</a><a class="extend next" rel="next" href="/archives/2020/page/3/">下一页 &amp;raquo;</a>
-  </nav>
 
 </section>
         

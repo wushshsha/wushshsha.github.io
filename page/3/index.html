@@ -92,6 +92,99 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-lnmn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/27/lnmn/" class="article-date">
+  <time datetime="2020-04-27T12:55:00.000Z" itemprop="datePublished">2020-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/27/lnmn/">ubuntu lnmn 安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一，创建用户-赋予root权限"><a href="#一，创建用户-赋予root权限" class="headerlink" title="一，创建用户,赋予root权限"></a>一，创建用户,赋予root权限</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">adduser name</span><br><span class="line">chmod u+w /etc/sudoers</span><br><span class="line">vi /etc/sudoers</span><br><span class="line"><span class="comment">#添加如下字段</span></span><br><span class="line">ybfq    ALL=(ALL:ALL) ALL</span><br><span class="line">chmod u-w /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h2 id="二，安装nginx"><a href="#二，安装nginx" class="headerlink" title="二，安装nginx"></a>二，安装nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="三，安装nodejs-npm-yarn"><a href="#三，安装nodejs-npm-yarn" class="headerlink" title="三，安装nodejs npm yarn"></a>三，安装nodejs npm yarn</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装apt 源</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -</span><br><span class="line"><span class="comment">## Run `sudo apt-get install -y nodejs` to install Node.js 12.x and npm</span></span><br><span class="line"><span class="comment"># 安装 nodejs</span></span><br><span class="line">sudo apt-get install -y nodejs</span><br><span class="line"><span class="comment"># 安装yarn， 这个在安装完成nodejs后会有提示说明怎么安装，如下</span></span><br><span class="line"><span class="comment">## Run `sudo apt-get install -y nodejs` to install Node.js 12.x and npm</span></span><br><span class="line"><span class="comment">## You may also need development tools to build native addons:</span></span><br><span class="line">     sudo apt-get install gcc g++ make</span><br><span class="line"><span class="comment">## To install the Yarn package manager, run:</span></span><br><span class="line">     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">     <span class="built_in">echo</span> <span class="string">"deb https://dl.yarnpkg.com/debian/ stable main"</span> | sudo tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line">     sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure>
+
+<h2 id="四，安装mysql"><a href="#四，安装mysql" class="headerlink" title="四，安装mysql"></a>四，安装mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt mysql-server</span><br><span class="line"><span class="comment">#可以查看安装包</span></span><br><span class="line">dpkg -l |grep mysql</span><br><span class="line"><span class="comment"># 进入到mysql</span></span><br><span class="line"><span class="built_in">cd</span> /etc/mydql</span><br><span class="line">sudo cat debian.cnf</span><br><span class="line"><span class="comment"># 根据打印的用户名密码进行登录</span></span><br><span class="line">mydql -u username -p ***</span><br><span class="line"></span><br><span class="line">use mysql;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 执行命令切换到mysql 数据库</span><br><span class="line">use mysql;</span><br><span class="line">update user set authentication_string&#x3D;&#39;&#39; where user&#x3D;&#39;root&#39; and host&#x3D;&quot;localhost&quot;;</span><br><span class="line">flush privileges;</span><br><span class="line">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;password&#39;;</span><br><span class="line">exit;</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line">create database sina default character set utf8mb4 collate utf8mb4_unicode_ci;</span><br><span class="line">#创建用户</span><br><span class="line">create user &#39;user&#39;@&#39;%&#39; identifiedby &#39;password&#39;;</span><br><span class="line">#给用户赋权限</span><br><span class="line">GRANT ALL PRIVILEGES ON sina.* TO &#39;user&#39;@&#39;%&#39; WITH GRANT OPTION;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/04/27/lnmn/" data-id="ckc4mk5xw00080nwbbohx9nef" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo-github" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/26/hexo-github/" class="article-date">
+  <time datetime="2020-04-26T09:25:49.000Z" itemprop="datePublished">2020-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/26/hexo-github/">hexo 创建博客部署到github上</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1，准备环境"><a href="#1，准备环境" class="headerlink" title="1，准备环境"></a>1，准备环境</h2><p>首先打开github，点击New repository，创建一个新仓库，仓库名必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README。</p>
+<h2 id="2，安装hexo"><a href="#2，安装hexo" class="headerlink" title="2，安装hexo"></a>2，安装hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g --registry=https://registry.npm.taobao.org</span><br><span class="line">mkdir hexo</span><br><span class="line"><span class="built_in">cd</span> hexo</span><br><span class="line">hexo init</span><br><span class="line">hexo install --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装部署到github的插件</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-部署到github"><a href="#3-部署到github" class="headerlink" title="3, 部署到github"></a>3, 部署到github</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成静态文件</span></span><br><span class="line">hexo g </span><br><span class="line"><span class="comment">#启动服务，可以在浏览器中查看</span></span><br><span class="line">hexo s</span><br><span class="line"><span class="comment">#部署到github中</span></span><br><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="4，创建自定义域名"><a href="#4，创建自定义域名" class="headerlink" title="4，创建自定义域名"></a>4，创建自定义域名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">source</span>/</span><br><span class="line"><span class="comment">#在source目录下创建自定义域名文件CNAME，直接输入youdomain.com</span></span><br><span class="line">vi CNAME</span><br><span class="line"><span class="comment">#保存域名</span></span><br><span class="line"><span class="comment">#自定义域名部署到gihtub</span></span><br><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="5，发布文章"><a href="#5，发布文章" class="headerlink" title="5，发布文章"></a>5，发布文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="built_in">test</span></span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/04/26/hexo-github/" data-id="ckc4mk5y1000c0nwb1ijv8zj7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/26/hello-world/" class="article-date">
@@ -131,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/04/26/hello-world/" data-id="ckc1qkqzn0003wywbc5j6bh9e" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/04/26/hello-world/" data-id="ckc4mk5xr00050nwb4tku66t5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -159,7 +252,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-render/" rel="tag">react-render</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-render/" rel="tag">react-render</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
     </div>
   </div>
 
@@ -169,7 +262,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 15px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 13.33px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
     </div>
   </div>
 
@@ -178,7 +271,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
     </div>
   </div>
 
@@ -191,7 +284,15 @@
       <ul>
         
           <li>
+            <a href="/2020/07/02/electron-cra-ts/">electron create-react-app typescript 环境搭建，优雅使用typescript</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/30/react-render/">关于父子组件渲染，以及 memo高阶组件的使用区别</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/25/mysql-passmode/">mysql8 修改用户密码登陆模式</a>
           </li>
         
           <li>
@@ -200,14 +301,6 @@
         
           <li>
             <a href="/2020/05/20/ts-environment-install/">ts 环境搭建</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/20/module/">es6 和 nodejs 模块的导入导出</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/19/node-path-url/">node路径相关数据</a>
           </li>
         
       </ul>

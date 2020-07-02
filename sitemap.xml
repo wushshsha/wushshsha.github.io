@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.xingke.space/2020/07/02/electron-cra-ts/</loc>
+    
+    <lastmod>2020-07-02T10:06:34.133Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.xingke.space/2020/06/25/mysql-passmode/</loc>
+    
+    <lastmod>2020-07-02T09:01:36.359Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.xingke.space/2020/06/30/react-render/</loc>
     
-    <lastmod>2020-06-30T09:35:50.290Z</lastmod>
+    <lastmod>2020-07-02T09:00:51.282Z</lastmod>
     
   </url>
   
