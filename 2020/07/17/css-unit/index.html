@@ -28,19 +28,20 @@
 
         
   
-  <title>Tag: markdown | 星客空间</title>
+  <title>css 相关单位 px em rem 等 | 星客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="星客的博客空间">
-<meta property="og:type" content="website">
-<meta property="og:title" content="星客空间">
-<meta property="og:url" content="http://blog.xingke.space/tags/markdown/index.html">
+  <meta name="description" content="1，绝对尺寸单位, 经常使用px，其他单位在打印中常用    单位 名称 等价换算    cm 厘米 1cm &#x3D; 96px&#x2F;2.54   mm 毫米 1mm &#x3D; 1&#x2F;10th of 1cm   Q 四分之一毫米 1Q &#x3D; 1&#x2F;40th of 1cm   in 英寸 1in &#x3D; 2.54cm &#x3D; 96px   pc 十二点活字 1pc &#x3D; 1&#x2F;16th of 1in   pt 点 1pt &#x3D; 1&#x2F;7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css 相关单位 px em rem 等">
+<meta property="og:url" content="http://blog.xingke.space/2020/07/17/css-unit/index.html">
 <meta property="og:site_name" content="星客空间">
-<meta property="og:description" content="星客的博客空间">
+<meta property="og:description" content="1，绝对尺寸单位, 经常使用px，其他单位在打印中常用    单位 名称 等价换算    cm 厘米 1cm &#x3D; 96px&#x2F;2.54   mm 毫米 1mm &#x3D; 1&#x2F;10th of 1cm   Q 四分之一毫米 1Q &#x3D; 1&#x2F;40th of 1cm   in 英寸 1in &#x3D; 2.54cm &#x3D; 96px   pc 十二点活字 1pc &#x3D; 1&#x2F;16th of 1in   pt 点 1pt &#x3D; 1&#x2F;7">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-17T09:42:14.000Z">
+<meta property="article:modified_time" content="2020-07-17T09:53:21.589Z">
 <meta property="article:author" content="wushshsha">
-<meta property="article:tag" content="技术">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="文档">
+<meta property="article:tag" content="html">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
@@ -90,40 +91,143 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/28/markdown/" class="archive-article-date">
-  <time datetime="2020-04-28T09:23:20.000Z" itemprop="datePublished">4月 28</time>
+        <section id="main"><article id="post-css-unit" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/17/css-unit/" class="article-date">
+  <time datetime="2020-07-17T09:42:14.000Z" itemprop="datePublished">2020-07-17</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/28/markdown/">markdown</a>
+    <h1 class="article-title" itemprop="name">
+      css 相关单位 px em rem 等
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1，绝对尺寸单位, 经常使用px，其他单位在打印中常用</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>名称</th>
+<th>等价换算</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cm</td>
+<td>厘米</td>
+<td>1cm = 96px/2.54</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>毫米</td>
+<td>1mm = 1/10th of 1cm</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>四分之一毫米</td>
+<td>1Q = 1/40th of 1cm</td>
+</tr>
+<tr>
+<td>in</td>
+<td>英寸</td>
+<td>1in = 2.54cm = 96px</td>
+</tr>
+<tr>
+<td>pc</td>
+<td>十二点活字</td>
+<td>1pc = 1/16th of 1in</td>
+</tr>
+<tr>
+<td>pt</td>
+<td>点</td>
+<td>1pt = 1/72th of 1in</td>
+</tr>
+<tr>
+<td>px</td>
+<td>像素</td>
+<td>1px = 1/96th of 1in</td>
+</tr>
+</tbody></table>
+<p>2，相对长度单位</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>相对于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>em</code></td>
+<td>在 font-size 中使用是相对于父元素的字体大小，在其他属性中使用是相对于自身的字体大小，如 width</td>
+</tr>
+<tr>
+<td><code>ex</code></td>
+<td>字符“x”的高度</td>
+</tr>
+<tr>
+<td><code>ch</code></td>
+<td>数字“0”的宽度</td>
+</tr>
+<tr>
+<td><code>rem</code></td>
+<td>根元素的字体大小</td>
+</tr>
+<tr>
+<td><code>lh</code></td>
+<td>元素的line-height</td>
+</tr>
+<tr>
+<td><code>vw</code></td>
+<td>视窗宽度的1%</td>
+</tr>
+<tr>
+<td><code>vh</code></td>
+<td>视窗高度的1%</td>
+</tr>
+<tr>
+<td><code>vmin</code></td>
+<td>视窗较小尺寸的1%</td>
+</tr>
+<tr>
+<td><code>vmax</code></td>
+<td>视图大尺寸的1%</td>
+</tr>
+</tbody></table>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xingke.space/2020/07/17/css-unit/" data-id="ckcq1p1qa0000znwb1cz6cq5q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/" rel="tag">html</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/02/electron-cra-ts/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">electron create-react-app typescript 环境搭建，优雅使用typescript</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
