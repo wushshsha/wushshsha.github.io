@@ -119,7 +119,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/09/29/2020-0-29-flag/" data-id="ckfosr5h60000n7wb7put1vtt" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/09/29/2020-0-29-flag/" data-id="ckfotecjn0000opwb055ufzrp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA/" rel="tag">个人</a></li></ul>
@@ -247,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/07/17/css-unit/" data-id="ckfosr5hc0001n7wbeyxh15eq" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/07/17/css-unit/" data-id="ckfoteck30001opwbdt1f75jj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/" rel="tag">html</a></li></ul>
@@ -325,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/07/02/electron-cra-ts/" data-id="ckfosr5hk0005n7wb0fbfdxzz" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/07/02/electron-cra-ts/" data-id="ckfotecki0008opwbg4a2dc86" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
@@ -373,11 +373,14 @@ export default function () {
         &lt;Child&gt;&lt;/Child&gt;
     &lt;/Parent&gt;
 }
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  这种情况，当点击&#96;&#96;&#96;Parent&#96;&#96;&#96; 组件的按 钮+1的时候，子组件&#96;&#96;&#96;Child&#96;&#96;&#96;不会刷新</span><br><span class="line">---</span><br><span class="line">- &#96;&#96;&#96;react</span><br><span class="line">    import React, &#123; useState &#125; from &#39;react&#39;</span><br><span class="line">    export default function Parent() &#123;</span><br><span class="line">        const [count, setCount] &#x3D; useState(0)</span><br><span class="line">        console.log(&quot;parent&quot;, count)</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;div&gt;Parent &#123;count&#125;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setCount(count + 1)&#125;&gt;Click +1&lt;&#x2F;button&gt;</span><br><span class="line">            &lt;Child &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    export function Child() &#123;</span><br><span class="line">        console.log(&quot;child&quot;)</span><br><span class="line">        return &lt;div&gt;Child&lt;&#x2F;div&gt;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-这种情况，当点击```Parent``` 组件的按 钮+1的时候，子组件```Child```会刷新</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  这种情况，当点击&#96;&#96;&#96;Parent&#96;&#96;&#96; 组件的按 钮+1的时候，子组件&#96;&#96;&#96;Child&#96;&#96;&#96;不会刷新</span><br><span class="line"></span><br><span class="line">  ---</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;react</span><br><span class="line">    import React, &#123; useState &#125; from &#39;react&#39;</span><br><span class="line">    export default function Parent() &#123;</span><br><span class="line">        const [count, setCount] &#x3D; useState(0)</span><br><span class="line">        console.log(&quot;parent&quot;, count)</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;div&gt;Parent &#123;count&#125;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setCount(count + 1)&#125;&gt;Click +1&lt;&#x2F;button&gt;</span><br><span class="line">            &lt;Child &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    export function Child() &#123;</span><br><span class="line">        console.log(&quot;child&quot;)</span><br><span class="line">        return &lt;div&gt;Child&lt;&#x2F;div&gt;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+这种情况，当点击```Parent``` 组件的按 钮+1的时候，子组件```Child```会刷新
+
+---
+
+</code></pre>
 </li>
 </ul>
-<hr>
 <ul>
 <li><pre><code class="react">import React, { useState, memo } from &apos;react&apos;
 export default function Parent() {
@@ -401,7 +404,7 @@ const Child = memo(() =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/06/30/react-render/" data-id="ckfosr5ix0017n7wb1jvt6yaf" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/06/30/react-render/" data-id="ckfotecne002iopwbc71shmkz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-render/" rel="tag">react-render</a></li></ul>
@@ -443,7 +446,7 @@ const Child = memo(() =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/06/25/mysql-passmode/" data-id="ckfosr5i9000gn7wbegge2fgn" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/06/25/mysql-passmode/" data-id="ckfotecl0000gopwbc7qyb4h0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
@@ -513,7 +516,7 @@ const Child = memo(() =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/21/paypal-ipn/" data-id="ckfosr5ih000on7wb49th0orj" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/21/paypal-ipn/" data-id="ckfotecla000nopwb3e075ux9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li></ul>
@@ -589,7 +592,7 @@ npm init
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/20/ts-environment-install/" data-id="ckfosr5iu0014n7wb9twofabz" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/20/ts-environment-install/" data-id="ckfotecnj002jopwb11vdgdlv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
@@ -661,7 +664,7 @@ npm init
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/20/module/" data-id="ckfosr5i3000cn7wb8wtc94ar" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/20/module/" data-id="ckfotecku000eopwbch91en4o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
@@ -703,7 +706,7 @@ npm init
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/19/node-path-url/" data-id="ckfosr5ig000nn7wb0dpxc6rd" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/19/node-path-url/" data-id="ckfoteclh000qopwbbgwbhfbo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
@@ -745,7 +748,7 @@ npm init
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xingke.space/2020/05/17/ts-config/" data-id="ckfosr5in000wn7wb6b974ei7" class="article-share-link">Share</a>
+      <a data-url="http://blog.xingke.space/2020/05/17/ts-config/" data-id="ckfoteclw0012opwbd0f8a57r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li></ul>

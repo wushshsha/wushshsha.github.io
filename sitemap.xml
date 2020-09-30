@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.xingke.space/2020/06/30/react-render/</loc>
+    
+    <lastmod>2020-09-30T03:12:40.895Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.xingke.space/2020/09/29/2020-0-29-flag/</loc>
     
     <lastmod>2020-09-30T02:54:29.499Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://blog.xingke.space/2020/06/25/mysql-passmode/</loc>
     
     <lastmod>2020-07-02T09:01:36.359Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.xingke.space/2020/06/30/react-render/</loc>
-    
-    <lastmod>2020-07-02T09:00:51.282Z</lastmod>
     
   </url>
   
