@@ -28,19 +28,19 @@
 
         
   
-  <title>Tag: hexo | 星客空间</title>
+  <title>ffmpeg字幕操作 | 星客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="星客的博客空间">
-<meta property="og:type" content="website">
-<meta property="og:title" content="星客空间">
-<meta property="og:url" content="https://xingke.space/tags/hexo/index.html">
+  <meta name="description" content="一，增加字幕流 # -i输入文件，  # -map 0:0 第一个0代表输入的第一个文件，第二个0代表该文件中的第一个流  # -c:a copy 代表输入的文件中音频部分编码不变直接输出  # -c:v copy 代表输入的文件中视频部分编码不变直接输出 # -c:s copy 代表输入的文件中字幕部分编码不变直接输出 ffmpeg -i input.avi -i sub.ass -map 0:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ffmpeg字幕操作">
+<meta property="og:url" content="https://xingke.space/2020/10/10/2020-10-10-ffmpeg/index.html">
 <meta property="og:site_name" content="星客空间">
-<meta property="og:description" content="星客的博客空间">
+<meta property="og:description" content="一，增加字幕流 # -i输入文件，  # -map 0:0 第一个0代表输入的第一个文件，第二个0代表该文件中的第一个流  # -c:a copy 代表输入的文件中音频部分编码不变直接输出  # -c:v copy 代表输入的文件中视频部分编码不变直接输出 # -c:s copy 代表输入的文件中字幕部分编码不变直接输出 ffmpeg -i input.avi -i sub.ass -map 0:">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-10T09:38:07.000Z">
+<meta property="article:modified_time" content="2020-10-10T10:05:11.860Z">
 <meta property="article:author" content="wushshsha">
-<meta property="article:tag" content="技术">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="文档">
+<meta property="article:tag" content="ffmpeg">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
@@ -93,40 +93,71 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/26/hexo-github/" class="archive-article-date">
-  <time datetime="2020-04-26T09:25:49.000Z" itemprop="datePublished">4月 26</time>
+        <section id="main"><article id="post-2020-10-10-ffmpeg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/10/2020-10-10-ffmpeg/" class="article-date">
+  <time datetime="2020-10-10T09:38:07.000Z" itemprop="datePublished">2020-10-10</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/26/hexo-github/">hexo 创建博客部署到github上</a>
+    <h1 class="article-title" itemprop="name">
+      ffmpeg字幕操作
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一，增加字幕流"><a href="#一，增加字幕流" class="headerlink" title="一，增加字幕流"></a>一，增加字幕流</h3><ul>
+<li><pre><code class="bash"><span class="comment"># -i输入文件， </span>
+<span class="comment"># -map 0:0 第一个0代表输入的第一个文件，第二个0代表该文件中的第一个流 </span>
+<span class="comment"># -c:a copy 代表输入的文件中音频部分编码不变直接输出 </span>
+<span class="comment"># -c:v copy 代表输入的文件中视频部分编码不变直接输出</span>
+<span class="comment"># -c:s copy 代表输入的文件中字幕部分编码不变直接输出</span>
+ffmpeg -i input.avi -i sub.ass -map 0:0 -map 0:1 -map 1 -c:a copy -c:v copy -c:s copy out.mkv
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 二，提取字幕流</span><br><span class="line"></span><br><span class="line">1. &#96;&#96;&#96;bash</span><br><span class="line">   # 原始文本输出</span><br><span class="line">   # 相同解释同上</span><br><span class="line">   # -an 代表取消输入文件中的音频部分</span><br><span class="line">   # -vn 代表取消输入文件中的视频部分</span><br><span class="line">   # -bsf:s 代表比特流过滤器其中字幕部分 把mov中的字幕转化为text</span><br><span class="line">   # -scodec 同-codec:s ,意思是设置字幕编码，copy意思是与输入文件字幕编码相同</span><br><span class="line">   # -f rawvideo 指定输出格式</span><br><span class="line">   ffmpeg -i output.mkv -an -vn -bsf:s mov2textsub -scodec copy -f rawvideo sub.txt</span><br></pre></td></tr></table></figure></code></pre>
+</li>
+</ul>
+<ol start="2">
+<li><pre><code class="bash"><span class="comment"># 原始文本输出</span>
+<span class="comment"># 相同解释同上</span>
+ffmpeg -i output.mkv -an -vn -c:s copy -f rawvideo -map 0:s sub2.txt
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. &#96;&#96;&#96;bash</span><br><span class="line">   # 原始文本输出</span><br><span class="line">   # ass格式输出</span><br><span class="line">   ffmpeg -i output.mkv -an -vn -scodec copy sub3.ass</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xingke.space/2020/10/10/2020-10-10-ffmpeg/" data-id="ckg3ija2w00004ywb5rqocxcq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/09/2020-10-09-css/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">css 元素 垂直居中</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
