@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://xingke.space/2020/10/19/2020-10-19-summary/</loc>
+    <lastmod>2020-10-19</lastmod>
+  </url>  <url>
+    <loc>https://xingke.space/2020/09/29/2020-0-29-flag/</loc>
+    <lastmod>2020-10-19</lastmod>
+  </url>  <url>
     <loc>https://xingke.space/2020/10/13/2020-10-13-css/</loc>
     <lastmod>2020-10-13</lastmod>
   </url>  <url>
@@ -14,9 +20,6 @@
     <lastmod>2020-10-09</lastmod>
   </url>  <url>
     <loc>https://xingke.space/2020/06/30/react-render/</loc>
-    <lastmod>2020-09-30</lastmod>
-  </url>  <url>
-    <loc>https://xingke.space/2020/09/29/2020-0-29-flag/</loc>
     <lastmod>2020-09-30</lastmod>
   </url>  <url>
     <loc>https://xingke.space/2020/07/17/css-unit/</loc>

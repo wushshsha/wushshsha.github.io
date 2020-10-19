@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xingke.space/2020/10/19/2020-10-19-summary/</loc>
+    
+    <lastmod>2020-10-19T11:50:44.951Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xingke.space/2020/09/29/2020-0-29-flag/</loc>
+    
+    <lastmod>2020-10-19T11:12:10.429Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xingke.space/2020/10/13/2020-10-13-css/</loc>
     
-    <lastmod>2020-10-13T11:50:09.059Z</lastmod>
+    <lastmod>2020-10-13T11:50:27.455Z</lastmod>
     
   </url>
   
@@ -33,13 +47,6 @@
     <loc>https://xingke.space/2020/06/30/react-render/</loc>
     
     <lastmod>2020-09-30T03:20:49.825Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xingke.space/2020/09/29/2020-0-29-flag/</loc>
-    
-    <lastmod>2020-09-30T02:54:29.499Z</lastmod>
     
   </url>
   
