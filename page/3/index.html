@@ -95,10 +95,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-nginx" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2020-10-20-webpack" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/05/11/nginx/" class="article-date">
-  <time datetime="2020-05-11T03:46:49.000Z" itemprop="datePublished">2020-05-11</time>
+    <a href="/2020/10/20/2020-10-20-webpack/" class="article-date">
+  <time datetime="2020-10-20T11:12:50.000Z" itemprop="datePublished">2020-10-20</time>
 </a>
     
   </div>
@@ -109,7 +109,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/11/nginx/">nginx</a>
+      <a class="article-title" href="/2020/10/20/2020-10-20-webpack/">webpack基本使用</a>
     </h1>
   
 
@@ -117,576 +117,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1，匹配规则-以openresty为例，可以使用echo库"><a href="#1，匹配规则-以openresty为例，可以使用echo库" class="headerlink" title="1，匹配规则,以openresty为例，可以使用echo库"></a>1，匹配规则,以openresty为例，可以使用echo库</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-steam;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line">    <span class="attribute">default_type</span> text/html;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"hello nginx"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> = /a &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"=/a"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span><span class="regexp"> ^~</span> /a &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"^~ /a"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span><span class="regexp"> ^~</span> /a/b &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"^~ /a/b"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> <span class="regexp">~ ^/[a-z]</span>&#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"~ ^/[a-z]"</span></span><br><span class="line">    &#125;</span><br><span class="line">    location <span class="regexp">~ ^/\w</span>&#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"~ ^/\w"</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2，配置反向代理"><a href="#2，配置反向代理" class="headerlink" title="2，配置反向代理"></a>2，配置反向代理</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-steam;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line">    <span class="attribute">default_type</span> text/html;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"hello world"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> /a/ &#123;</span><br><span class="line">      <span class="attribute">proxy_pass</span> http://yourdomain:80/;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3，负载均衡配置"><a href="#3，负载均衡配置" class="headerlink" title="3，负载均衡配置"></a>3，负载均衡配置</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-steam;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">upstream</span> group1&#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.12:80</span> weight=<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.12:81</span> weight=<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line">    <span class="attribute">default_type</span> text/html;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">      <span class="attribute">echo</span> <span class="string">"hello world"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> /a/ &#123;</span><br><span class="line">      <span class="attribute">proxy_pass</span> http://yourdomain:80/;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 负载均衡</span></span><br><span class="line">    <span class="attribute">location</span> /b/ &#123;</span><br><span class="line">      <span class="attribute">proxy_pass</span> http://group1/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/05/11/nginx/" data-id="ckgghsi1p000y1jwbbgm3hboi" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-docker-compose" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/10/docker-compose/" class="article-date">
-  <time datetime="2020-05-10T11:58:52.000Z" itemprop="datePublished">2020-05-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/10/docker-compose/">docker-compose</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="以lnmp为例讲解docker-compose使用"><a href="#以lnmp为例讲解docker-compose使用" class="headerlink" title="以lnmp为例讲解docker-compose使用"></a>以lnmp为例讲解docker-compose使用</h2><h3 id="1，在宿主机-root目录下创建连个文件夹"><a href="#1，在宿主机-root目录下创建连个文件夹" class="headerlink" title="1，在宿主机/root目录下创建连个文件夹"></a>1，在宿主机/root目录下创建连个文件夹</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"><span class="comment"># 在宿主机创建配置文件夹，当前路径在 /root</span></span><br><span class="line">mkdir conf</span><br><span class="line"><span class="comment"># 创建html文件夹</span></span><br><span class="line">mkdir html</span><br></pre></td></tr></table></figure>
-
-<h3 id="2，在html-目录中创建测试文件-index-html-test-php-mysql-php"><a href="#2，在html-目录中创建测试文件-index-html-test-php-mysql-php" class="headerlink" title="2，在html 目录中创建测试文件 index.html test.php mysql.php"></a>2，在html 目录中创建测试文件 index.html test.php mysql.php</h3><ul>
-<li><p>创建index.html</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi index.html</span><br></pre></td></tr></table></figure>
-
-<p>输入如下内容</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello world</span><br></pre></td></tr></table></figure>
+        <h3 id="一，webpack基础"><a href="#一，webpack基础" class="headerlink" title="一，webpack基础"></a>一，webpack基础</h3><ol>
+<li><p>概念，<strong>webpack</strong> 是一个用于现代 JavaScript 应用程序的<em>静态模块打包工具*。当 webpack 处理应用程序时，它会在内部构建一个 相互依赖图，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 *bundle</em></p>
 </li>
-<li><p>创建test.php</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi test.php</span><br></pre></td></tr></table></figure>
-
-<p>输入如下内容</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
+<li><p>核心概念主要是以下几个方面：</p>
+<ol>
+<li><p>入口起点（entry），通俗说就是webpack是从那个文件开始的配置方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./path/to/my/entry/file.js'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<ul>
-<li><p>创建mysql.php</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi mysql.php</span><br></pre></td></tr></table></figure>
-
-<p>输入如下内容</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"mysql"</span>;</span><br><span class="line">$username = <span class="string">"root"</span>;</span><br><span class="line">$password = <span class="string">"123456"</span>;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">$conn = mysqli_connect($servername, $username, $password);</span><br><span class="line"><span class="keyword">if</span> (!$conn) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . mysqli_connect_error());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Connection finished!"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
+<li><p>输出（output），就是说通过webpack打包后输出文件放在什么位置，怎么命名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./path/to/my/entry/file.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    filename: <span class="string">'my-first-webpack.bundle.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h3 id="3，在conf创建nginx配置文件"><a href="#3，在conf创建nginx配置文件" class="headerlink" title="3，在conf创建nginx配置文件"></a>3，在conf创建nginx配置文件</h3><ul>
-<li><p>创建nginx.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi nginx.conf</span><br></pre></td></tr></table></figure>
-
-<p>添加内容</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Default server configuration</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-stream;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># SSL configuration</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># listen 443 ssl default_server;</span></span><br><span class="line">        <span class="comment"># listen [::]:443 ssl default_server;</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Note: You should disable gzip for SSL traffic.</span></span><br><span class="line">        <span class="comment"># See: https://bugs.debian.org/773332</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Read up on ssl_ciphers to ensure a secure configuration.</span></span><br><span class="line">        <span class="comment"># See: https://bugs.debian.org/765782</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Self signed certs generated by the ssl-cert package</span></span><br><span class="line">        <span class="comment"># Don't use them in a production server!</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># include snippets/snakeoil.conf;</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Add index.php to the list if you are using PHP</span></span><br><span class="line">        <span class="attribute">index</span> index.html index.htm index.nginx-debian.html index.php;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">                <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line">                <span class="comment"># as directory, then fall back to displaying a 404.</span></span><br><span class="line">                <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># pass PHP scripts to FastCGI server</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="attribute">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">               <span class="comment"># With php-fpm (or other unix sockets):</span></span><br><span class="line">               <span class="attribute">fastcgi_pass</span>   php:<span class="number">9000</span>;</span><br><span class="line">               <span class="attribute">fastcgi_index</span>  index.php;</span><br><span class="line">               <span class="attribute">fastcgi_param</span>  SCRIPT_FILENAME  /var/www/html/<span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">               <span class="attribute">include</span>        fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># deny access to .htaccess files, if Apache's document root</span></span><br><span class="line">        <span class="comment"># concurs with nginx's one</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment">#location ~ /\.ht &#123;</span></span><br><span class="line">        <span class="comment">#       deny all;</span></span><br><span class="line">        <span class="comment">#&#125;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<li><p>模块加载器（loader），webpack默认只能解析js和json文件，通过各种各样的loader解析器，webpack就可以处理相应的其它类型文件，供应用程序使用,loader有两个属性，test是匹配文件规则，use对于规则使用的加载器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'my-first-webpack.bundle.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; <span class="attr">test</span>: <span class="regexp">/\.txt$/</span>, <span class="attr">use</span>: <span class="string">'raw-loader'</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h3 id="4，创建docker-compose的配置文件-docker-compose-yml"><a href="#4，创建docker-compose的配置文件-docker-compose-yml" class="headerlink" title="4，创建docker-compose的配置文件 docker-compose.yml"></a>4，创建docker-compose的配置文件 docker-compose.yml</h3><ul>
-<li><p>创建yml配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line">vi docker-compose.yml</span><br></pre></td></tr></table></figure>
-
-<p>输入如下内容</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx:alpine</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/root/html:/usr/share/nginx/html</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/root/conf/nginx.conf:/etc/nginx/nginx.conf</span></span><br><span class="line">  <span class="attr">php:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">devilbox/php-fpm:5.2-work-0.89</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/root/html:/var/www/html</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.6</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">MYSQL_ROOT_PASSWORD=123456</span></span><br></pre></td></tr></table></figure>
-
+<li><p>插件（plugin），可以执行更复杂的任务，例如，打包优化，资源管理，注入环境变量等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>); <span class="comment">// 通过 npm 安装</span></span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>); <span class="comment">// 用于访问内置插件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; <span class="attr">test</span>: <span class="regexp">/\.txt$/</span>, <span class="attr">use</span>: <span class="string">'raw-loader'</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;<span class="attr">template</span>: <span class="string">'./src/index.html'</span>&#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h3 id="5，启动docker"><a href="#5，启动docker" class="headerlink" title="5，启动docker"></a>5，启动docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"><span class="comment"># 启动docker</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="comment"># 停止docker</span></span><br><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
-
-<h3 id="6，结构图"><a href="#6，结构图" class="headerlink" title="6，结构图"></a>6，结构图</h3><p><img src="/2020/05/10/docker-compose/docker-compose.png" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/05/10/docker-compose/" data-id="ckgghsi17000c1jwb84210nc7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-dockerfile" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/10/dockerfile/" class="article-date">
-  <time datetime="2020-05-10T06:56:19.000Z" itemprop="datePublished">2020-05-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/10/dockerfile/">dockerfile</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-Dockerfile-介绍"><a href="#1-Dockerfile-介绍" class="headerlink" title="1,Dockerfile 介绍"></a>1,Dockerfile 介绍</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> alpine  <span class="comment"># 基于的镜像 这个是必须有的</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app <span class="comment"># 指定工作目录</span></span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> src/ /app <span class="comment"># 把宿主机下src路径下的内容拷贝到  /app 这个目录下</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> 321 &gt;&gt; 1.txt <span class="comment"># 执行 命令，这个run命令是在创建镜像时执行的</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> tail -f 1.txt <span class="comment"># 执行cmd命令，这个CMD 命令时在运行时执行的</span></span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/05/10/dockerfile/" data-id="ckgghsi1d000i1jwb3b1k3kie" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-docker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/09/docker/" class="article-date">
-  <time datetime="2020-05-09T15:05:48.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/09/docker/">docker</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1，常用命令"><a href="#1，常用命令" class="headerlink" title="1，常用命令"></a>1，常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装的镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 查看已经运行的container</span></span><br><span class="line">docker ps -all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 container</span></span><br><span class="line">docker stop containerID</span><br><span class="line"><span class="comment"># 删除container</span></span><br><span class="line">docker rm ***</span><br><span class="line"><span class="comment"># 删除镜像 </span></span><br><span class="line">docker rmi ***</span><br><span class="line"><span class="comment"># docker 帮助命令</span></span><br><span class="line">docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 运行， </span></span><br><span class="line">	<span class="comment">#-d 后台运行， </span></span><br><span class="line">	<span class="comment">#-p 端口映射，前面是外部端口，后面是内部端口 nginx是镜像 </span></span><br><span class="line">	<span class="comment">#--name 给container 起名字</span></span><br><span class="line">	<span class="comment">#-v 文件映射，外面的文件路径和里面的文件路径的映射</span></span><br><span class="line">docker run -d -p 80:80 --name mynginx -v `<span class="built_in">pwd</span>`:/user/share/nginx/html  nginx </span><br><span class="line"></span><br><span class="line"><span class="comment"># 在运行的镜像中执行bash命令</span></span><br><span class="line">docker <span class="built_in">exec</span> -it containrId bash </span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过dockerfile 编译镜像</span></span><br><span class="line">docker build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从仓库拉取推送镜像</span></span><br><span class="line">docker pull nginx</span><br><span class="line">docker push image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器创建镜像 containerId 是运行的镜像id m1为给镜像起的名字</span></span><br><span class="line">docker commit containerId m1 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 将镜像保存为docker tar文件,其中image是要保存的镜像，1.tar为文件名</span></span><br><span class="line">docker save image &gt; 1.tar </span><br><span class="line"></span><br><span class="line"><span class="comment"># 从tar文件加载镜像 1.tar为加载的tar文件名</span></span><br><span class="line">docker load &lt; 1.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看container 的log信息</span></span><br><span class="line">docker logs -f containerId</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker</span><br><span class="line"><span class="comment"># 参考文档</span></span><br><span class="line">https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
-
-<h2 id="2，安装docker"><a href="#2，安装docker" class="headerlink" title="2，安装docker"></a>2，安装docker</h2><ul>
-<li><p>​    mac 安装</p>
-<ul>
-<li><p>官网 <a href="https://docker.com" target="_blank" rel="noopener">https://docker.com</a></p>
-</li>
-<li><p>国内镜像源 <a href="http://mirrors.aliyun.com/docker-toolbox/" target="_blank" rel="noopener">http://mirrors.aliyun.com/docker-toolbox/</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="3，dockerfile"><a href="#3，dockerfile" class="headerlink" title="3，dockerfile"></a>3，dockerfile</h2><ul>
-<li><p>创建dockerfile指令 vim Dockerfile</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx</span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> ./ /usr/share/nginx/html/</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># image 为镜像名字，. 为dockerfile所在的文件目录</span></span><br><span class="line">docker build -t  image .</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="4，结构图"><a href="#4，结构图" class="headerlink" title="4，结构图"></a>4，结构图</h2><p><img src="/2020/05/09/docker/docker.png" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/05/09/docker/" data-id="ckgghsi19000e1jwb8cg90blt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-linux-cmd" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/29/linux-cmd/" class="article-date">
-  <time datetime="2020-04-29T08:08:26.000Z" itemprop="datePublished">2020-04-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/linux-cmd/">linux_cmd</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>tar 压缩 ，解压</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将文件 srcFile 压缩 target.tar.gz</span></span><br><span class="line">tar -czf target.tar.gz srcFile</span><br><span class="line"><span class="comment">#将文件解压</span></span><br><span class="line">tar -xzvf  srcFile</span><br></pre></td></tr></table></figure>
-
-
+<li><p>模式（mode），通过选择 <code>development</code>, <code>production</code> 或 <code>none</code> 之中的一个，来设置 <code>mode</code> 参数，你可以启用 webpack 内置在相应环境下的优化。其默认值为 <code>production</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  mode: <span class="string">'production'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<ol start="2">
-<li><p>远程拷贝文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将本地文件 target  拷贝到 root@tar.com</span></span><br><span class="line">scp target  root@tar.com:~/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>linux 版本号查询</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># linux 版本号</span></span><br><span class="line">cat /proc/version</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 版本号查询</span></span><br><span class="line">cat /etc/issue</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/04/29/linux-cmd/" data-id="ckgghsi1j000p1jwba69dbxqw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
+<h3 id="二，常用配置"><a href="#二，常用配置" class="headerlink" title="二，常用配置"></a>二，常用配置</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  mode: <span class="string">"production"</span>, <span class="comment">// "production" | "development" | "none"</span></span><br><span class="line">  <span class="comment">// Chosen mode tells webpack to use its built-in optimizations accordingly.</span></span><br><span class="line">  entry: <span class="string">"./app/entry"</span>, <span class="comment">// string | object | array</span></span><br><span class="line">  <span class="comment">// 默认为 ./src</span></span><br><span class="line">  <span class="comment">// 这里应用程序开始执行</span></span><br><span class="line">  <span class="comment">// webpack 开始打包</span></span><br><span class="line">  output: &#123;</span><br><span class="line">    <span class="comment">// webpack 如何输出结果的相关选项</span></span><br><span class="line">    path:path.resolve(__dirname, <span class="string">"dist"</span>), <span class="comment">// string (default)</span></span><br><span class="line">    <span class="comment">// 所有输出文件的目标路径</span></span><br><span class="line">    <span class="comment">// 必须是绝对路径（使用 Node.js 的 path 模块）</span></span><br><span class="line">    filename: <span class="string">"[name].js"</span>, <span class="comment">// string (default)</span></span><br><span class="line">    <span class="comment">// entry chunk 的文件名模板</span></span><br><span class="line">    publicPath: <span class="string">"/assets/"</span>, <span class="comment">// string</span></span><br><span class="line">    <span class="comment">// 输出解析文件的目录，url 相对于 HTML 页面</span></span><br><span class="line">    library: &#123; <span class="comment">// 这里有一种旧的语法形式可以使用（点击显示）</span></span><br><span class="line">      type: <span class="string">"umd"</span>, <span class="comment">// 通用模块定义</span></span><br><span class="line">      <span class="comment">// the type of the exported library</span></span><br><span class="line">      name: <span class="string">"MyLibrary"</span>, <span class="comment">// string | string[]</span></span><br><span class="line">      <span class="comment">// the name of the exported library</span></span><br><span class="line">    &#125;,</span><br><span class="line">    uniqueName: <span class="string">"my-application"</span>, <span class="comment">// (defaults to package.json "name")</span></span><br><span class="line">    <span class="comment">// unique name for this build to avoid conflicts with other builds in the same HTML</span></span><br><span class="line">    name: <span class="string">"my-config"</span>,</span><br><span class="line">    <span class="comment">// name of the configuration, shown in output</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    <span class="comment">// 模块配置相关</span></span><br><span class="line">    rules: [</span><br><span class="line">      <span class="comment">// 模块规则（配置 loader、解析器等选项）</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// Conditions:</span></span><br><span class="line">        test: <span class="regexp">/\\.jsx?$/</span>,</span><br><span class="line">        include: [</span><br><span class="line">          path.resolve(__dirname, <span class="string">"app"</span>)</span><br><span class="line">        ],</span><br><span class="line">        exclude: [</span><br><span class="line">          path.resolve(__dirname, <span class="string">"app/demo-files"</span>)</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">// these are matching conditions, each accepting a regular expression or string</span></span><br><span class="line">        <span class="comment">// test and include have the same behavior, both must be matched</span></span><br><span class="line">        <span class="comment">// exclude must not be matched (takes preferrence over test and include)</span></span><br><span class="line">        <span class="comment">// Best practices:</span></span><br><span class="line">        <span class="comment">// - Use RegExp only in test and for filename matching</span></span><br><span class="line">        <span class="comment">// - Use arrays of absolute paths in include and exclude to match the full path</span></span><br><span class="line">        <span class="comment">// - Try to avoid exclude and prefer include</span></span><br><span class="line">        <span class="comment">// Each condition can also receive an object with "and", "or" or "not" properties</span></span><br><span class="line">        <span class="comment">// which are an array of conditions.</span></span><br><span class="line">        issuer: <span class="regexp">/\\.css$/</span>,</span><br><span class="line">        issuer: path.resolve(__dirname, <span class="string">"app"</span>),</span><br><span class="line">        issuer: &#123; <span class="attr">and</span>: [ <span class="regexp">/\\.css$/</span>, path.resolve(__dirname, <span class="string">"app"</span>) ] &#125;,</span><br><span class="line">        issuer: &#123; <span class="attr">or</span>: [ <span class="regexp">/\\.css$/</span>, path.resolve(__dirname, <span class="string">"app"</span>) ] &#125;,</span><br><span class="line">        issuer: &#123; <span class="attr">not</span>: [ <span class="regexp">/\\.css$/</span> ] &#125;,</span><br><span class="line">        issuer: [ <span class="regexp">/\\.css$/</span>, path.resolve(__dirname, <span class="string">"app"</span>) ], <span class="comment">// like "or"</span></span><br><span class="line">        <span class="comment">// conditions for the issuer (the origin of the import)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Actions:</span></span><br><span class="line">        loader: <span class="string">"babel-loader"</span>,</span><br><span class="line">        <span class="comment">// 应该应用的 loader，它相对上下文解析</span></span><br><span class="line">        options: &#123;</span><br><span class="line">          presets: [<span class="string">"es2015"</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// options for the loader</span></span><br><span class="line">        use: [</span><br><span class="line">          <span class="comment">// apply multiple loaders and options instead</span></span><br><span class="line">          <span class="string">"htmllint-loader"</span>,</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">"html-loader"</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              <span class="comment">// ...</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">        type: <span class="string">"javascript/auto"</span>,</span><br><span class="line">        <span class="comment">// specifies the module type</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        oneOf: [</span><br><span class="line">          <span class="comment">// ... (rules)</span></span><br><span class="line">        ]</span><br><span class="line">        <span class="comment">// only use one of these nested rules</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// ... (conditions)</span></span><br><span class="line">        rules: [</span><br><span class="line">          <span class="comment">// ... (rules)</span></span><br><span class="line">        ]</span><br><span class="line">        <span class="comment">// use all of these nested rules (combine with conditions to be useful)</span></span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    <span class="comment">// options for resolving module requests</span></span><br><span class="line">    <span class="comment">// (does not apply to resolving of loaders)</span></span><br><span class="line">    modules: [<span class="string">"node_modules"</span>,path.resolve(__dirname, <span class="string">"app"</span>)],</span><br><span class="line">    <span class="comment">// directories where to look for modules (in order)</span></span><br><span class="line">    extensions: [<span class="string">".js"</span>, <span class="string">".json"</span>, <span class="string">".jsx"</span>, <span class="string">".css"</span>],</span><br><span class="line">    <span class="comment">// 使用的扩展名</span></span><br><span class="line">    alias: &#123;</span><br><span class="line">      <span class="comment">// a list of module name aliases</span></span><br><span class="line">      <span class="comment">// aliases are imported relative to the current context</span></span><br><span class="line">      <span class="string">"module"</span>: <span class="string">"new-module"</span>,</span><br><span class="line">      <span class="comment">// 别名："module" -&gt; "new-module" 和 "module/path/file" -&gt; "new-module/path/file"</span></span><br><span class="line">      <span class="string">"only-module$"</span>: <span class="string">"new-module"</span>,</span><br><span class="line">      <span class="comment">// 别名 "only-module" -&gt; "new-module"，但不匹配 "only-module/path/file" -&gt; "new-module/path/file"</span></span><br><span class="line">      <span class="string">"module"</span>: path.resolve(__dirname, <span class="string">"app/third/module.js"</span>),</span><br><span class="line">      <span class="comment">// alias "module" -&gt; "./app/third/module.js" and "module/file" results in error</span></span><br><span class="line">      <span class="string">"module"</span>: path.resolve(__dirname, <span class="string">"app/third"</span>),</span><br><span class="line">      <span class="comment">// alias "module" -&gt; "./app/third" and "module/file" -&gt; "./app/third/file"</span></span><br><span class="line">      [path.resolve(__dirname, <span class="string">"app/module.js"</span>)]: path.resolve(__dirname, <span class="string">"app/alternative-module.js"</span>),</span><br><span class="line">      <span class="comment">// alias "./app/module.js" -&gt; "./app/alternative-module.js"</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  performance: &#123;</span><br><span class="line">    hints: <span class="string">"warning"</span>, <span class="comment">// 枚举</span></span><br><span class="line">    maxAssetSize: <span class="number">200000</span>, <span class="comment">// 整数类型（以字节为单位）</span></span><br><span class="line">    maxEntrypointSize: <span class="number">400000</span>, <span class="comment">// 整数类型（以字节为单位）</span></span><br><span class="line">    assetFilter: <span class="function"><span class="keyword">function</span>(<span class="params">assetFilename</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 提供资源文件名的断言函数</span></span><br><span class="line">      <span class="keyword">return</span> assetFilename.endsWith(<span class="string">'.css'</span>) || assetFilename.endsWith(<span class="string">'.js'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  devtool: <span class="string">"source-map"</span>, <span class="comment">// enum</span></span><br><span class="line">  <span class="comment">// 通过为浏览器调试工具提供极其详细的源映射的元信息来增强调试能力，</span></span><br><span class="line">  <span class="comment">// 但会牺牲构建速度。</span></span><br><span class="line">  context: __dirname, <span class="comment">// string（绝对路径！）</span></span><br><span class="line">  <span class="comment">// webpack 的主目录</span></span><br><span class="line">  <span class="comment">// entry 和 module.rules.loader 选项</span></span><br><span class="line">  <span class="comment">// 都相对于此目录解析</span></span><br><span class="line">  target: <span class="string">"web"</span>, <span class="comment">// 枚举  node, electron-render electron-main 等，也可以带版本号</span></span><br><span class="line">  <span class="comment">// the environment in which the bundle should run</span></span><br><span class="line">  <span class="comment">// changes chunk loading behavior, available external modules</span></span><br><span class="line">  <span class="comment">// and generated code style</span></span><br><span class="line">  &#125;,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    proxy: &#123; <span class="comment">// proxy URLs to backend development server</span></span><br><span class="line">      <span class="string">'/api'</span>: <span class="string">'http://localhost:3000'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    contentBase: path.join(__dirname, <span class="string">'public'</span>), <span class="comment">// boolean | string | array, static file location</span></span><br><span class="line">    compress: <span class="literal">true</span>, <span class="comment">// enable gzip compression</span></span><br><span class="line">    historyApiFallback: <span class="literal">true</span>, <span class="comment">// true for index.html upon 404, object for multiple paths</span></span><br><span class="line">    hot: <span class="literal">true</span>, <span class="comment">// hot module replacement. Depends on HotModuleReplacementPlugin</span></span><br><span class="line">    https: <span class="literal">false</span>, <span class="comment">// true for self-signed, object for cert authority</span></span><br><span class="line">    noInfo: <span class="literal">true</span>, <span class="comment">// only errors &amp; warns on hot reload</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// list of additional plugins</span></span><br><span class="line">  optimization: &#123;</span><br><span class="line">    chunkIds: <span class="string">"size"</span>,</span><br><span class="line">    <span class="comment">// method of generating ids for chunks</span></span><br><span class="line">    moduleIds: <span class="string">"size"</span>,</span><br><span class="line">    <span class="comment">// method of generating ids for modules</span></span><br><span class="line">    mangleExports: <span class="string">"size"</span>,</span><br><span class="line">    <span class="comment">// rename export names to shorter names</span></span><br><span class="line">    minimize: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// minimize the output files</span></span><br><span class="line">    minimizer: [<span class="keyword">new</span> CssMinimizer(), <span class="string">"..."</span>],</span><br><span class="line">    <span class="comment">// minimizers to use for the output files</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
 
 
-  
-    <article id="post-markdown" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/28/markdown/" class="article-date">
-  <time datetime="2020-04-28T09:23:20.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/markdown/">markdown</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>转载：<a href="https://www.jianshu.com/p/ebe52d2d468f" target="_blank" rel="noopener">https://www.jianshu.com/p/ebe52d2d468f</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/04/28/markdown/" data-id="ckgghsi1l000t1jwb57yadp2f" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mysql-cmd" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/28/mysql-cmd/" class="article-date">
-  <time datetime="2020-04-28T08:21:02.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/mysql-cmd/">mysql 常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1、连接Mysql"><a href="#1、连接Mysql" class="headerlink" title="1、连接Mysql"></a>1、连接Mysql</h1><p>格式： mysql -h主机地址 -u用户名 －p用户密码</p>
-<p><strong>1、连接到本机上的MYSQL。</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h localhost -u user -p password</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、退出MYSQL命令</strong>： exit （回车）</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2、用户相关操作"><a href="#2、用户相关操作" class="headerlink" title="2、用户相关操作"></a>2、用户相关操作</h1><ol>
-<li>进入到mysql数据库下</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>对新用户增删改</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1.创建用户:</span><br><span class="line"># 指定ip：192.118.1.1的mjj用户登录</span><br><span class="line">create user &#39;alex&#39;@&#39;192.118.1.1&#39; identified by &#39;123&#39;;</span><br><span class="line"># 指定ip：192.118.1.开头的mjj用户登录</span><br><span class="line">create user &#39;alex&#39;@&#39;192.118.1.%&#39; identified by &#39;123&#39;;</span><br><span class="line"># 指定任何ip的mjj用户登录</span><br><span class="line">create user &#39;alex&#39;@&#39;%&#39; identified by &#39;123&#39;;</span><br><span class="line"></span><br><span class="line">2.删除用户</span><br><span class="line">drop user &#39;用户名&#39;@&#39;IP地址&#39;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.修改用户</span><br><span class="line">rename user &#39;用户名&#39;@&#39;IP地址&#39; to &#39;新用户名&#39;@&#39;IP地址&#39;;</span><br><span class="line"></span><br><span class="line">4.修改密码</span><br><span class="line">set password for &#39;用户名&#39;@&#39;IP地址&#39;&#x3D;Password(&#39;新密码&#39;);</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>对当前的用户授权管理</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#查看权限</span><br><span class="line">show grants for &#39;用户&#39;@&#39;IP地址&#39;</span><br><span class="line"></span><br><span class="line">#授权 mjj用户仅对db1.t1文件有查询、插入和更新的操作</span><br><span class="line">grant select ,insert,update on db1.t1 to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line"></span><br><span class="line"># 表示有所有的权限，除了grant这个命令，这个命令是root才有的。mjj用户对db1下的t1文件有任意操作</span><br><span class="line">grant all privileges  on db1.t1 to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line">#mjj用户对db1数据库中的文件执行任何操作</span><br><span class="line">grant all privileges  on db1.* to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line">#mjj用户对所有数据库中文件有任何操作</span><br><span class="line">grant all privileges  on *.*  to &quot;alex&quot;@&#39;%&#39;;</span><br><span class="line"> </span><br><span class="line">#取消权限</span><br><span class="line"> </span><br><span class="line"># 取消mjj用户对db1的t1文件的任意操作</span><br><span class="line">revoke all on db1.t1 from &#39;alex&#39;@&quot;%&quot;;  </span><br><span class="line"></span><br><span class="line"># 取消来自远程服务器的mjj用户对数据库db1的所有表的所有权限</span><br><span class="line"></span><br><span class="line">revoke all on db1.* from &#39;alex&#39;@&quot;%&quot;;  </span><br><span class="line"></span><br><span class="line">取消来自远程服务器的mjj用户所有数据库的所有的表的权限</span><br><span class="line">revoke all privileges on *.* from &#39;alex&#39;@&#39;%&#39;;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>MySql备份命令行操作</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 备份：数据表结构+数据</span><br><span class="line">mysqdump -u root db1 &gt; db1.sql -p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 备份：数据表结构</span><br><span class="line">mysqdump -u root -d db1 &gt; db1.sql -p</span><br><span class="line"></span><br><span class="line">#导入现有的数据到某个数据库</span><br><span class="line">#1.先创建一个新的数据库</span><br><span class="line">create database db10;</span><br><span class="line"># 2.将已有的数据库文件导入到db10数据库中</span><br><span class="line">mysqdump -u root -d db10 &lt; db1.sql -p</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="3、数据库相关操作"><a href="#3、数据库相关操作" class="headerlink" title="3、数据库相关操作"></a>3、数据库相关操作</h1><ol>
-<li><p>创建数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database &#96;mydb&#96; character set utf8 collate utf8_general_ci;</span><br><span class="line">create database &#96;mydb&#96; character set utf8mb4 collate utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>显示数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>切换到数据库 (xingke)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use xingke</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除数据库（xingke）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database xingke;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h1 id="4、表相关操作"><a href="#4、表相关操作" class="headerlink" title="4、表相关操作"></a>4、表相关操作</h1><h2 id="4-1，创建表"><a href="#4-1，创建表" class="headerlink" title="4.1，创建表"></a>4.1，创建表</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>以下为创建MySQL数据表的SQL通用语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name (column_name column_type);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>以下例子中我们将在 RUNOOB 数据库中创建数据表runoob_tbl：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS &#96;runoob_tbl&#96;(</span><br><span class="line">   &#96;runoob_id&#96; INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   &#96;runoob_title&#96; VARCHAR(100) NOT NULL,</span><br><span class="line">   &#96;runoob_author&#96; VARCHAR(40) NOT NULL,</span><br><span class="line">   &#96;submission_date&#96; DATE,</span><br><span class="line">   PRIMARY KEY ( &#96;runoob_id&#96; )</span><br><span class="line">)ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8;</span><br></pre></td></tr></table></figure>
-
-<p>实例解析：</p>
-<ul>
-<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
-<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
-<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
-<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>以下为创建数据表 runoob_tbl 实例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; CREATE TABLE runoob_tbl(</span><br><span class="line">   -&gt; runoob_id INT NOT NULL AUTO_INCREMENT,</span><br><span class="line">   -&gt; runoob_title VARCHAR(100) NOT NULL,</span><br><span class="line">   -&gt; runoob_author VARCHAR(40) NOT NULL,</span><br><span class="line">   -&gt; submission_date DATE,</span><br><span class="line">   -&gt; PRIMARY KEY ( runoob_id )</span><br><span class="line">   -&gt; )ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8;</span><br><span class="line">Query OK, 0 rows affected (0.16 sec)</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-2，添加数据"><a href="#4-2，添加数据" class="headerlink" title="4.2，添加数据"></a>4.2，添加数据</h2><h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><p>以下为向MySQL数据表插入数据通用的 <strong>INSERT INTO</strong> SQL语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure>
-
-<p>如果数据是字符型，必须使用单引号或者双引号，如：”value”。</p>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>以下实例中我们将向 runoob_tbl 表插入三条数据:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p password;</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl </span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;学习 PHP&quot;, &quot;菜鸟教程&quot;, NOW());</span><br><span class="line">Query OK, 1 rows affected, 1 warnings (0.01 sec)</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl</span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;学习 MySQL&quot;, &quot;菜鸟教程&quot;, NOW());</span><br><span class="line">Query OK, 1 rows affected, 1 warnings (0.01 sec)</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl</span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;JAVA 教程&quot;, &quot;RUNOOB.COM&quot;, &#39;2016-05-06&#39;);</span><br><span class="line">Query OK, 1 rows affected (0.00 sec)</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-3-修改数据"><a href="#4-3-修改数据" class="headerlink" title="4.3 修改数据"></a>4.3 修改数据</h2><h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><p>以下是 UPDATE 命令修改 MySQL 数据表数据的通用 SQL 语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1&#x3D;new-value1, field2&#x3D;new-value2</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>你可以同时更新一个或多个字段。</li>
-<li>你可以在 WHERE 子句中指定任何条件。</li>
-<li>你可以在一个单独表中同时更新数据。</li>
-</ul>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE runoob_tbl SET runoob_title&#x3D;&#39;学习 C++&#39; WHERE runoob_id&#x3D;3;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-4-查询数据"><a href="#4-4-查询数据" class="headerlink" title="4.4 查询数据"></a>4.4 查询数据</h2><h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><p>以下为在MySQL数据库中查询数据通用的 SELECT 语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE Clause]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。</li>
-<li>SELECT 命令可以读取一条或者多条记录。</li>
-<li>你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据</li>
-<li>你可以使用 WHERE 语句来包含任何条件。</li>
-<li>你可以使用 LIMIT 属性来设定返回的记录数。</li>
-<li>你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。</li>
-</ul>
-<h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from runoob_tbl;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-5-删除表"><a href="#4-5-删除表" class="headerlink" title="4.5 删除表"></a>4.5 删除表</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><p>以下为删除MySQL数据表的通用语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h3><p>以下实例删除了数据表runoob_tbl:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE runoob_tbl;</span><br></pre></td></tr></table></figure>
-
-<h1 id="5、数据导入导出"><a href="#5、数据导入导出" class="headerlink" title="5、数据导入导出"></a>5、数据导入导出</h1><h2 id="5-1-导出"><a href="#5-1-导出" class="headerlink" title="5.1 导出"></a>5.1 导出</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据库导出</span></span><br><span class="line">mysqldump -u user -p  databases &gt; name.sql</span><br><span class="line"><span class="comment">#数据库导入</span></span><br><span class="line"><span class="built_in">source</span> /home/abc/abc.sql;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-2导入"><a href="#5-2导入" class="headerlink" title="5.2导入"></a>5.2导入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;home&#x2F;abc&#x2F;abc.sql;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/04/28/mysql-cmd/" data-id="ckgghsi1m000v1jwbao8o3lw0" class="article-share-link">Share</a>
+      <a data-url="https://xingke.space/2020/10/20/2020-10-20-webpack/" data-id="ckghxjlkg0000hpwb6vg7a522" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-php-function" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/28/php-function/" class="article-date">
-  <time datetime="2020-04-28T08:02:09.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/php-function/">php 常用函数备注</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1，字符串替换"><a href="#1，字符串替换" class="headerlink" title="1，字符串替换"></a>1，字符串替换</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="comment">//实例一：字符串替换字符串</span></span><br><span class="line">  $str1 = str_replace(<span class="string">"red"</span>,<span class="string">"black"</span>,<span class="string">"red green yellow pink purple"</span>);</span><br><span class="line">  <span class="keyword">echo</span> $str1.<span class="string">""</span>;  <span class="comment">//输出结果为black green yellow pink purple</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="comment">//实例二：字符串替换数组键值</span></span><br><span class="line">  $arr = <span class="keyword">array</span>(<span class="string">"blue"</span>,<span class="string">"red"</span>,<span class="string">"green"</span>,<span class="string">"yellow"</span>);</span><br><span class="line">  $str1 = str_replace(<span class="string">"red"</span>,<span class="string">"pink"</span>,$arr,$i);</span><br><span class="line">  print_r($str1);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="comment">//实例三：数组替换数组，映射替换</span></span><br><span class="line">  $arr1 = <span class="keyword">array</span>(<span class="string">"banana"</span>,<span class="string">"orange"</span>);</span><br><span class="line">  $arr2 = <span class="keyword">array</span>(<span class="string">"pitaya"</span>,<span class="string">"tomato"</span>);</span><br><span class="line">  $con_arr = <span class="keyword">array</span>(<span class="string">"apple"</span>,<span class="string">"orange"</span>,<span class="string">"banana"</span>,<span class="string">"grape"</span>);</span><br><span class="line">  $con_rep = str_replace($arr1,$arr2,$con_arr,$count);</span><br><span class="line">  print_r($con_rep);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="comment">//实例四：如$search为数组，$replace为字符串时</span></span><br><span class="line">  $search = <span class="keyword">array</span>(<span class="string">"banana"</span>,<span class="string">"grape"</span>);</span><br><span class="line">  $replace = <span class="string">"tomato"</span>;</span><br><span class="line">  $arr = <span class="keyword">array</span>(<span class="string">"banana"</span>,<span class="string">"apple"</span>,<span class="string">"orange"</span>,<span class="string">"grape"</span>);</span><br><span class="line">  $new_arr = str_replace($search,$replace,$arr,$count);</span><br><span class="line">  print_r($new_arr);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/04/28/php-function/" data-id="ckgghsi1t00131jwb88g0czu3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-native-to-aws-s3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/28/native-to-aws-s3/" class="article-date">
-  <time datetime="2020-04-28T04:29:33.000Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/native-to-aws-s3/">把本地文件上传到s3上</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-mysql-表结构"><a href="#1-mysql-表结构" class="headerlink" title="1,mysql 表结构"></a>1,mysql 表结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SET NAMES utf8;</span><br><span class="line">SET FOREIGN_KEY_CHECKS &#x3D; 0;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">--  Table structure for &#96;s3_upload&#96;</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS &#96;s3_upload&#96;;</span><br><span class="line">CREATE TABLE &#96;s3_upload&#96; (</span><br><span class="line">  &#96;id&#96; int(11) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  &#96;book_path&#96; varchar(255) NOT NULL,</span><br><span class="line">  &#96;status&#96; tinyint(4) NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;0---不成功，1---成功&#39;,</span><br><span class="line">  &#96;created_at&#96; int(11) NOT NULL,</span><br><span class="line">  PRIMARY KEY (&#96;id&#96;)</span><br><span class="line">) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;476 DEFAULT CHARSET&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">SET FOREIGN_KEY_CHECKS &#x3D; 1;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2，执行脚本"><a href="#2，执行脚本" class="headerlink" title="2，执行脚本"></a>2，执行脚本</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">    $dbhost = <span class="string">'""'</span>;            <span class="comment">//数据库地址</span></span><br><span class="line">    $dbuser = <span class="string">'***'</span>;            <span class="comment">// 用户名</span></span><br><span class="line">    $dbpw = <span class="string">'***'</span>;                <span class="comment">// 密码</span></span><br><span class="line">    $dbname = <span class="string">'***'</span>;            <span class="comment">// 数据库名</span></span><br><span class="line">    $pconnect = <span class="number">0</span>;                <span class="comment">// 连接数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require_once</span> <span class="string">'./db/db_mysql.class.php'</span>;</span><br><span class="line">$db = <span class="keyword">new</span> dbstuff;</span><br><span class="line">$db-&gt;connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect);</span><br><span class="line">$db-&gt;setcharset(<span class="string">"utf-8"</span>);</span><br><span class="line">$dbuser = $dbpw = $dbname = $pconnect = <span class="keyword">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_book_status</span><span class="params">($bookpath)</span></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $db;</span><br><span class="line">    $query = $db-&gt;query(<span class="string">"insert into s3_upload (book_path, status, created_at) values('"</span>.$bookpath.<span class="string">"',1, "</span>.time().<span class="string">")"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_book_status</span><span class="params">($bookpath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $db;</span><br><span class="line">    $result = <span class="keyword">array</span>();</span><br><span class="line">    $sql = <span class="string">"SELECT * FROM  s3_upload  WHERE book_path = '$bookpath' and status =1 "</span>;</span><br><span class="line">    $query = $db-&gt;query($sql);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> ( ($row = $db-&gt;fetch_array($query )) !== <span class="keyword">false</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        $result[] = $row;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(count($result))</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;    </span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">'vendor/autoload.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Aws</span>\<span class="title">S3</span>\<span class="title">S3Client</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Aws</span>\<span class="title">S3</span>\<span class="title">Exception</span>\<span class="title">S3Exception</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$s3 = S3Client::factory(<span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'region'</span> =&gt; <span class="string">'us-east-1'</span>, <span class="comment">//i.e.: 'us-east-1'</span></span><br><span class="line">            <span class="string">'version'</span> =&gt; <span class="string">'2006-03-01'</span>, <span class="comment">//i.e.: 'latest'</span></span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContent</span><span class="params">($path)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">      $arr[] = $value;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> $arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//--------------------------------获取书本内的文件名------start</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">searchDir</span><span class="params">($path,&amp;$files)</span></span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span>(is_dir($path))&#123;</span><br><span class="line"> </span><br><span class="line">    $opendir = opendir($path);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> ($file = readdir($opendir))&#123;</span><br><span class="line">      <span class="keyword">if</span>($file != <span class="string">'.'</span> &amp;&amp; $file != <span class="string">'..'</span>)&#123;</span><br><span class="line">        searchDir($path.<span class="string">'/'</span>.$file, $files);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    closedir($opendir);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    $files[] = $path;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//得到目录名</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDir</span><span class="params">($dir)</span></span>&#123;</span><br><span class="line">  $files = <span class="keyword">array</span>();</span><br><span class="line">  searchDir($dir, $files);</span><br><span class="line">  <span class="keyword">return</span> $files;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* $filenames = getDir('/srv/www/api.1stflip.com/public_html/trbooks/dqda/36id/');</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">foreach ($filenames as $value)&#123;</span></span><br><span class="line"><span class="comment">  echo $value."\r\n";</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line"><span class="comment">//-----------------------------获取书本内文件名----------end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$rootPath = <span class="string">"/srv/www/api.1stflip.com/public_html/trbooks/"</span>;</span><br><span class="line">$bookpath = <span class="string">"drre/39v3/"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContentCicle</span><span class="params">($path,$flag=false)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">        $temp  = $path.$value;</span><br><span class="line">        <span class="keyword">if</span>(!is_dir($temp))&#123;</span><br><span class="line">                <span class="comment">//echo $temp."\r\n";</span></span><br><span class="line">		<span class="keyword">global</span> $s3, $rootPath;</span><br><span class="line">		$str = str_replace($rootPath,<span class="string">""</span>,$temp);</span><br><span class="line">		<span class="comment">//echo $str."\r\n";</span></span><br><span class="line">		$s3res = $s3-&gt;doesObjectExist(<span class="string">"online.1stflip.com"</span>,$str);</span><br><span class="line">		<span class="keyword">if</span>(!$s3res)&#123;</span><br><span class="line">			<span class="keyword">echo</span> $str.<span class="string">"---uploading"</span>.<span class="string">"\r\n"</span>;</span><br><span class="line">			$s3-&gt;upload(<span class="string">"online.1stflip.com"</span>,$str,$temp);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">echo</span> $str.<span class="string">"---existed"</span>.<span class="string">"\r\n"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        getDirContentCicle($temp.<span class="string">'/'</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//----------获取用户书包目录---------start</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContent3</span><span class="params">($path,$resFlag=false)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">      <span class="keyword">if</span>($resFlag)&#123;</span><br><span class="line">        $bookpath = $path.$value;</span><br><span class="line">        <span class="keyword">if</span>($bookpath &amp;&amp; is_dir($bookpath))&#123;</span><br><span class="line">            <span class="keyword">echo</span> $bookpath.<span class="string">"\r\n"</span>;</span><br><span class="line">	    $bookstatus = get_book_status($bookpath);</span><br><span class="line">	    <span class="keyword">if</span>(!$bookstatus)&#123;</span><br><span class="line">	      getDirContentCicle($bookpath.<span class="string">'/'</span>);</span><br><span class="line">	      set_book_status($bookpath);</span><br><span class="line"></span><br><span class="line"> 	    &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContent2</span><span class="params">($path)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">      getDirContent3($path.$value.<span class="string">'/'</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//----------获取用户书包目录---------end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//getDirContentCicle($rootPath.$bookpath);</span></span><br><span class="line">getDirContent2($rootPath);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="3-备注"><a href="#3-备注" class="headerlink" title="3,备注"></a>3,备注</h1><p>aws s3 sdk 用的是2.8 版本</p>
-<p>php 版本号是5.3版本</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/04/28/native-to-aws-s3/" data-id="ckgghsi1o000x1jwb1rlid3kq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-lnmn" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/27/lnmn/" class="article-date">
-  <time datetime="2020-04-27T12:55:00.000Z" itemprop="datePublished">2020-04-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/27/lnmn/">ubuntu lnmn 安装</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一，创建用户-赋予root权限"><a href="#一，创建用户-赋予root权限" class="headerlink" title="一，创建用户,赋予root权限"></a>一，创建用户,赋予root权限</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">adduser name</span><br><span class="line">chmod u+w /etc/sudoers</span><br><span class="line">vi /etc/sudoers</span><br><span class="line"><span class="comment">#添加如下字段</span></span><br><span class="line">ybfq    ALL=(ALL:ALL) ALL</span><br><span class="line">chmod u-w /etc/sudoers</span><br></pre></td></tr></table></figure>
-
-<h2 id="二，安装nginx"><a href="#二，安装nginx" class="headerlink" title="二，安装nginx"></a>二，安装nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install nginx</span><br></pre></td></tr></table></figure>
-
-<h2 id="三，安装nodejs-npm-yarn"><a href="#三，安装nodejs-npm-yarn" class="headerlink" title="三，安装nodejs npm yarn"></a>三，安装nodejs npm yarn</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装apt 源</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -</span><br><span class="line"><span class="comment">## Run `sudo apt-get install -y nodejs` to install Node.js 12.x and npm</span></span><br><span class="line"><span class="comment"># 安装 nodejs</span></span><br><span class="line">sudo apt-get install -y nodejs</span><br><span class="line"><span class="comment"># 安装yarn， 这个在安装完成nodejs后会有提示说明怎么安装，如下</span></span><br><span class="line"><span class="comment">## Run `sudo apt-get install -y nodejs` to install Node.js 12.x and npm</span></span><br><span class="line"><span class="comment">## You may also need development tools to build native addons:</span></span><br><span class="line">     sudo apt-get install gcc g++ make</span><br><span class="line"><span class="comment">## To install the Yarn package manager, run:</span></span><br><span class="line">     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">     <span class="built_in">echo</span> <span class="string">"deb https://dl.yarnpkg.com/debian/ stable main"</span> | sudo tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line">     sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure>
-
-<h2 id="四，安装mysql"><a href="#四，安装mysql" class="headerlink" title="四，安装mysql"></a>四，安装mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt mysql-server</span><br><span class="line"><span class="comment">#可以查看安装包</span></span><br><span class="line">dpkg -l |grep mysql</span><br><span class="line"><span class="comment"># 进入到mysql</span></span><br><span class="line"><span class="built_in">cd</span> /etc/mydql</span><br><span class="line">sudo cat debian.cnf</span><br><span class="line"><span class="comment"># 根据打印的用户名密码进行登录</span></span><br><span class="line">mydql -u username -p ***</span><br><span class="line"></span><br><span class="line">use mysql;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 执行命令切换到mysql 数据库</span><br><span class="line">use mysql;</span><br><span class="line">update user set authentication_string&#x3D;&#39;&#39; where user&#x3D;&#39;root&#39; and host&#x3D;&quot;localhost&quot;;</span><br><span class="line">flush privileges;</span><br><span class="line">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;password&#39;;</span><br><span class="line">exit;</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line">create database sina default character set utf8mb4 collate utf8mb4_unicode_ci;</span><br><span class="line">#创建用户</span><br><span class="line">create user &#39;user&#39;@&#39;%&#39; identifiedby &#39;password&#39;;</span><br><span class="line">#给用户赋权限</span><br><span class="line">GRANT ALL PRIVILEGES ON sina.* TO &#39;user&#39;@&#39;%&#39; WITH GRANT OPTION;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xingke.space/2020/04/27/lnmn/" data-id="ckgghsi1h000o1jwb7fi11624" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -698,7 +165,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -722,7 +189,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/ffmpeg/" style="font-size: 13.33px;">ffmpeg</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/person/" style="font-size: 13.33px;">person</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 13.33px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 16.67px;">webpack</a> <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" style="font-size: 10px;">垂直居中</a>
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/ffmpeg/" style="font-size: 13.33px;">ffmpeg</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/person/" style="font-size: 13.33px;">person</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 13.33px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 16.67px;">webpack</a> <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" style="font-size: 10px;">垂直居中</a>
     </div>
   </div>
 
@@ -744,6 +211,10 @@
       <ul>
         
           <li>
+            <a href="/2020/10/23/2020-10-23-node/">node基本介绍(二)</a>
+          </li>
+        
+          <li>
             <a href="/2020/10/21/2020-10-21-node/">node基本介绍(-)</a>
           </li>
         
@@ -757,10 +228,6 @@
         
           <li>
             <a href="/2020/10/13/2020-10-13-css/">css 实现文本垂直居中和省略号显示</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/12/2020-10-12-ffmpeg/">常用ffmpeg操作</a>
           </li>
         
       </ul>
