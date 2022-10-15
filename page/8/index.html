@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164772977-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-164772977-1');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?dbf4881df63827ea4e908f54012fc622";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+        
+  
+  <title>星客空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="星客的博客空间">
+<meta property="og:type" content="website">
+<meta property="og:title" content="星客空间">
+<meta property="og:url" content="https://xingke.space/page/8/index.html">
+<meta property="og:site_name" content="星客空间">
+<meta property="og:description" content="星客的博客空间">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="xingke">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="文档">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933655872655780"
+     crossorigin="anonymous"></script>
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">星客空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xingke.space"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2020-10-12-ffmpeg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/12/2020-10-12-ffmpeg/" class="article-date">
+  <time datetime="2020-10-12T10:28:15.000Z" itemprop="datePublished">2020-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/12/2020-10-12-ffmpeg/">常用ffmpeg操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一，基本概念"><a href="#一，基本概念" class="headerlink" title="一，基本概念"></a>一，基本概念</h3><ol>
+<li><p><strong><em>容器</em></strong> ，视频文件本身就是所谓容器，一般一面有以下几部分构成，包括视频，音频，字幕，附加信息等</p>
+<ul>
+<li><p>常用如下格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mp4</span><br><span class="line">mkv</span><br><span class="line">webm</span><br><span class="line">avi</span><br><span class="line">wav</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>命令查看支持的容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -formats</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong><em>编码格式</em></strong>，视频、音频、字幕都有各自的编码格式，每类格式又有相应的属性，比如视频的波特率，分辨率，长度等。</p>
+<ul>
+<li><p>常用的视频格式有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">h264       ---有版权费</span><br><span class="line">h265       ---有版权费</span><br><span class="line">vp8        ---无版权费</span><br><span class="line">vp9        ---无版权费</span><br><span class="line">av1        ---无版权费</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用音频格式有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mp3       ----有损音质，占用空间小</span><br><span class="line">aac       ----有损音质，占用空间小</span><br><span class="line">flac      ----无损音质，占用空间大</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用字幕格式有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">srt</span><br><span class="line">ssa</span><br><span class="line">ass</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ffmpeg命令查看支持的格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -codecs</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>编码解码器，是实现某种格式的库文件，每种格式可能有多种编码库来实现，常用编码库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">libx264               --- h264编码库</span><br><span class="line">nvenc                 --- 基于nvidia GPU的 h264编码库</span><br><span class="line">h264_videotoolbox     ---正版mac电脑上支持gpu的h264编码库</span><br><span class="line">libx265               ---开源的hevc编码库</span><br><span class="line">libvpx                ---vp8和vp9 编码库</span><br><span class="line">libaom                ---av1编码库</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
+</ol>
+<h3 id="二，ffmpeg-工作流程描述"><a href="#二，ffmpeg-工作流程描述" class="headerlink" title="二，ffmpeg 工作流程描述"></a>二，ffmpeg 工作流程描述</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> _______              ______________</span><br><span class="line">|       |            |              |</span><br><span class="line">| input |  demuxer   | encoded data |   decoder</span><br><span class="line">| file  | ---------&gt; | packets      | -----+</span><br><span class="line">|_______|            |______________|      |</span><br><span class="line">                                           v</span><br><span class="line">                                       _________</span><br><span class="line">                                      |         |</span><br><span class="line">                                      | decoded |</span><br><span class="line">                                      | frames  |</span><br><span class="line">                                      |_________|</span><br><span class="line"> ________             ______________       |</span><br><span class="line">|        |           |              |      |</span><br><span class="line">| output | &lt;-------- | encoded data | &lt;----+</span><br><span class="line">| file   |   muxer   | packets      |   encoder</span><br><span class="line">|________|           |______________|</span><br></pre></td></tr></table></figure>
+
+<h3 id="三，ffmpeg命令组成部分-整体分为5部分"><a href="#三，ffmpeg命令组成部分-整体分为5部分" class="headerlink" title="三，ffmpeg命令组成部分,整体分为5部分"></a>三，ffmpeg命令组成部分,整体分为5部分</h3><ol>
+<li><p>命令组成部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg [global_options] &#123;[input_file_options] -i input_url&#125; ... &#123;[output_file_options] output_url&#125; ...</span><br><span class="line">#global_options        ---全局参数，可省略</span><br><span class="line">#input_file_options    ---输入文件参数，可省略</span><br><span class="line">#input_url             ---输入文件路径</span><br><span class="line">#output_file_options   ---输出文件参数，可省略</span><br><span class="line">#output_url            ---输出文件路径</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用命令参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-c:        指定编码器</span><br><span class="line">-c copy:   直接复制，不经过重新编码（这样比较快）</span><br><span class="line">-c:v:      指定视频编码器</span><br><span class="line">-c:a:      指定音频编码器</span><br><span class="line">-i:        指定输入文件</span><br><span class="line">-an:       去除音频流</span><br><span class="line">-vn:       去除视频流</span><br><span class="line">-preset:   指定输出的视频质量，会影响文件的生成速度，有以下几个可用的值 ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow。</span><br><span class="line">-y:        不经过确认，输出时直接覆盖同名文件。</span><br><span class="line">-t:        指定音频的时长</span><br><span class="line">-to:       指定到某个时间结束</span><br><span class="line">-ss:       指定从某个时间开始</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="四，常用例子"><a href="#四，常用例子" class="headerlink" title="四，常用例子"></a>四，常用例子</h3><ol>
+<li><p>查看文件信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4</span><br><span class="line">ffmpeg -i input.mp4 -hide_banner  #只显示元信息</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换编码格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.file -c:v libx264 output.mp4  #指定编码器为libx264</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换容器格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -c copy output.webm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调整比特率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#码率在964K～3856K，缓冲区域为2000K</span><br><span class="line">ffmpeg -i input.mp4 -minrate 964K -maxrate 3856K -bufsize 2000K output.mp4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改变屏幕分辨率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># -vf 设置屏幕分辨率，其中scale&#x3D;480:-1，意思是 撑满宽度（设置为480），高度等比缩放</span><br><span class="line">ffmpeg -i input.mp4 -vf scale&#x3D;480:-1 output.mp4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提取音频</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vn -c:a copy output.aac</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加音轨</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将两个文件合并为一个</span><br><span class="line">ffmpeg -i input.aac -i input.mp4 output.mp4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>截图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#区间截图，其中%3d为输出文件名占位符</span><br><span class="line">ffmpeg -y -i input.mp4 -ss 00:01:00 -t 00:00:01 output_%3d.jpg</span><br><span class="line"></span><br><span class="line">#截取某个时间点图片，vframes截取1帧，-q:v设置图片质量，越小图片质量越高</span><br><span class="line">ffmpeg -ss 01:00:00 -i input -vframes 1 -q:v 2 output.jpg</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>截取部分视频</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -ss [start] -i [input] -t [duration] -c copy [output]</span><br><span class="line">ffmpeg -ss [start] -i [input] -to [end] -c copy [output]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>音频添加封面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># -loop 1 指图片无线循环，-shortest参数表示音频文件结束，输出视频就结束</span><br><span class="line">ffmpeg -loop 1 -i cover.jpg -i input.mp3 -c:v libx264 -c:a aac -b:a 192k -shortest output.mp4</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xingke.space/2020/10/12/2020-10-12-ffmpeg/" data-id="cl99dwd3o0004n83x8tim6o96" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/9/">下一页 &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person/" rel="tag">person</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-render/" rel="tag">react-render</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" rel="tag">垂直居中</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/ffmpeg/" style="font-size: 13.33px;">ffmpeg</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/person/" style="font-size: 13.33px;">person</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 13.33px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 16.67px;">webpack</a> <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" style="font-size: 10px;">垂直居中</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/26/2020-10-26-js/">js原型链及继承</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/23/2020-10-23-node/">node 12基本介绍(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/21/2020-10-21-node/">node 12基本介绍(-)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/20/2020-10-20-webpack/">webpack基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 xingke<br>
+      
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      
+        <a href="mailto:githubwu@163.com">githubwu@163.com</a>
+      
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

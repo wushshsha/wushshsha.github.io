@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164772977-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-164772977-1');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?dbf4881df63827ea4e908f54012fc622";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+        
+  
+  <title>docker-compose | 星客空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="以lnmp为例讲解docker-compose使用1，在宿主机&#x2F;root目录下创建连个文件夹12345cd &#x2F;root# 在宿主机创建配置文件夹，当前路径在 &#x2F;rootmkdir conf# 创建html文件夹mkdir html  2，在html 目录中创建测试文件 index.html test.php mysql.php 创建index.html 1vi index.html  输入如下内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker-compose">
+<meta property="og:url" content="https://xingke.space/2020/05/10/docker-compose/index.html">
+<meta property="og:site_name" content="星客空间">
+<meta property="og:description" content="以lnmp为例讲解docker-compose使用1，在宿主机&#x2F;root目录下创建连个文件夹12345cd &#x2F;root# 在宿主机创建配置文件夹，当前路径在 &#x2F;rootmkdir conf# 创建html文件夹mkdir html  2，在html 目录中创建测试文件 index.html test.php mysql.php 创建index.html 1vi index.html  输入如下内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xingke.space/2020/05/10/docker-compose/docker-compose.png">
+<meta property="article:published_time" content="2020-05-10T11:58:52.000Z">
+<meta property="article:modified_time" content="2022-10-15T03:29:59.500Z">
+<meta property="article:author" content="xingke">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xingke.space/2020/05/10/docker-compose/docker-compose.png">
+  
+    <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933655872655780"
+     crossorigin="anonymous"></script>
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">星客空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xingke.space"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-docker-compose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/10/docker-compose/" class="article-date">
+  <time datetime="2020-05-10T11:58:52.000Z" itemprop="datePublished">2020-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker-compose
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="以lnmp为例讲解docker-compose使用"><a href="#以lnmp为例讲解docker-compose使用" class="headerlink" title="以lnmp为例讲解docker-compose使用"></a>以lnmp为例讲解docker-compose使用</h2><h3 id="1，在宿主机-root目录下创建连个文件夹"><a href="#1，在宿主机-root目录下创建连个文件夹" class="headerlink" title="1，在宿主机/root目录下创建连个文件夹"></a>1，在宿主机/root目录下创建连个文件夹</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"><span class="comment"># 在宿主机创建配置文件夹，当前路径在 /root</span></span><br><span class="line">mkdir conf</span><br><span class="line"><span class="comment"># 创建html文件夹</span></span><br><span class="line">mkdir html</span><br></pre></td></tr></table></figure>
+
+<h3 id="2，在html-目录中创建测试文件-index-html-test-php-mysql-php"><a href="#2，在html-目录中创建测试文件-index-html-test-php-mysql-php" class="headerlink" title="2，在html 目录中创建测试文件 index.html test.php mysql.php"></a>2，在html 目录中创建测试文件 index.html test.php mysql.php</h3><ul>
+<li><p>创建index.html</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi index.html</span><br></pre></td></tr></table></figure>
+
+<p>输入如下内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello world</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建test.php</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi test.php</span><br></pre></td></tr></table></figure>
+
+<p>输入如下内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>创建mysql.php</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi mysql.php</span><br></pre></td></tr></table></figure>
+
+<p>输入如下内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"mysql"</span>;</span><br><span class="line">$username = <span class="string">"root"</span>;</span><br><span class="line">$password = <span class="string">"123456"</span>;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">$conn = mysqli_connect($servername, $username, $password);</span><br><span class="line"><span class="keyword">if</span> (!$conn) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . mysqli_connect_error());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Connection finished!"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="3，在conf创建nginx配置文件"><a href="#3，在conf创建nginx配置文件" class="headerlink" title="3，在conf创建nginx配置文件"></a>3，在conf创建nginx配置文件</h3><ul>
+<li><p>创建nginx.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi nginx.conf</span><br></pre></td></tr></table></figure>
+
+<p>添加内容</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Default server configuration</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">  <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">  <span class="attribute">include</span> mime.types;</span><br><span class="line">  <span class="attribute">default_type</span> application/octet-stream;</span><br><span class="line">  <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">  <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># SSL configuration</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># listen 443 ssl default_server;</span></span><br><span class="line">        <span class="comment"># listen [::]:443 ssl default_server;</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Note: You should disable gzip for SSL traffic.</span></span><br><span class="line">        <span class="comment"># See: https://bugs.debian.org/773332</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Read up on ssl_ciphers to ensure a secure configuration.</span></span><br><span class="line">        <span class="comment"># See: https://bugs.debian.org/765782</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Self signed certs generated by the ssl-cert package</span></span><br><span class="line">        <span class="comment"># Don't use them in a production server!</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># include snippets/snakeoil.conf;</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Add index.php to the list if you are using PHP</span></span><br><span class="line">        <span class="attribute">index</span> index.html index.htm index.nginx-debian.html index.php;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">                <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line">                <span class="comment"># as directory, then fall back to displaying a 404.</span></span><br><span class="line">                <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># pass PHP scripts to FastCGI server</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="attribute">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">               <span class="comment"># With php-fpm (or other unix sockets):</span></span><br><span class="line">               <span class="attribute">fastcgi_pass</span>   php:<span class="number">9000</span>;</span><br><span class="line">               <span class="attribute">fastcgi_index</span>  index.php;</span><br><span class="line">               <span class="attribute">fastcgi_param</span>  SCRIPT_FILENAME  /var/www/html/<span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">               <span class="attribute">include</span>        fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># deny access to .htaccess files, if Apache's document root</span></span><br><span class="line">        <span class="comment"># concurs with nginx's one</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment">#location ~ /\.ht &#123;</span></span><br><span class="line">        <span class="comment">#       deny all;</span></span><br><span class="line">        <span class="comment">#&#125;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="4，创建docker-compose的配置文件-docker-compose-yml"><a href="#4，创建docker-compose的配置文件-docker-compose-yml" class="headerlink" title="4，创建docker-compose的配置文件 docker-compose.yml"></a>4，创建docker-compose的配置文件 docker-compose.yml</h3><ul>
+<li><p>创建yml配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line">vi docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>输入如下内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx:alpine</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/root/html:/usr/share/nginx/html</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/root/conf/nginx.conf:/etc/nginx/nginx.conf</span></span><br><span class="line">  <span class="attr">php:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">devilbox/php-fpm:5.2-work-0.89</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">/root/html:/var/www/html</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.6</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">MYSQL_ROOT_PASSWORD=123456</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="5，启动docker"><a href="#5，启动docker" class="headerlink" title="5，启动docker"></a>5，启动docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"><span class="comment"># 启动docker</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="comment"># 停止docker</span></span><br><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
+
+<h3 id="6，结构图"><a href="#6，结构图" class="headerlink" title="6，结构图"></a>6，结构图</h3><p><img src="/2020/05/10/docker-compose/docker-compose.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xingke.space/2020/05/10/docker-compose/" data-id="cl99dwd430010n83xhsbi90iq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/11/nginx/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nginx
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/10/dockerfile/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">dockerfile</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person/" rel="tag">person</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-render/" rel="tag">react-render</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" rel="tag">垂直居中</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/ffmpeg/" style="font-size: 13.33px;">ffmpeg</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/person/" style="font-size: 13.33px;">person</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 13.33px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 16.67px;">webpack</a> <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" style="font-size: 10px;">垂直居中</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/26/2020-10-26-js/">js原型链及继承</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/23/2020-10-23-node/">node 12基本介绍(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/21/2020-10-21-node/">node 12基本介绍(-)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/20/2020-10-20-webpack/">webpack基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 xingke<br>
+      
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      
+        <a href="mailto:githubwu@163.com">githubwu@163.com</a>
+      
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

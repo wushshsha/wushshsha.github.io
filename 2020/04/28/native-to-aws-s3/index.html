@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164772977-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-164772977-1');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?dbf4881df63827ea4e908f54012fc622";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+        
+  
+  <title>把本地文件上传到s3上 | 星客空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1,mysql 表结构12345678910111213141516SET NAMES utf8;SET FOREIGN_KEY_CHECKS &#x3D; 0;-- ------------------------------  Table structure for &#96;s3_upload&#96;-- ----------------------------DROP TABLE IF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把本地文件上传到s3上">
+<meta property="og:url" content="https://xingke.space/2020/04/28/native-to-aws-s3/index.html">
+<meta property="og:site_name" content="星客空间">
+<meta property="og:description" content="1,mysql 表结构12345678910111213141516SET NAMES utf8;SET FOREIGN_KEY_CHECKS &#x3D; 0;-- ------------------------------  Table structure for &#96;s3_upload&#96;-- ----------------------------DROP TABLE IF">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-28T04:29:33.000Z">
+<meta property="article:modified_time" content="2022-10-15T03:29:59.502Z">
+<meta property="article:author" content="xingke">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="aws">
+<meta property="article:tag" content="s3">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933655872655780"
+     crossorigin="anonymous"></script>
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">星客空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xingke.space"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-native-to-aws-s3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/28/native-to-aws-s3/" class="article-date">
+  <time datetime="2020-04-28T04:29:33.000Z" itemprop="datePublished">2020-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      把本地文件上传到s3上
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-mysql-表结构"><a href="#1-mysql-表结构" class="headerlink" title="1,mysql 表结构"></a>1,mysql 表结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SET NAMES utf8;</span><br><span class="line">SET FOREIGN_KEY_CHECKS &#x3D; 0;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">--  Table structure for &#96;s3_upload&#96;</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS &#96;s3_upload&#96;;</span><br><span class="line">CREATE TABLE &#96;s3_upload&#96; (</span><br><span class="line">  &#96;id&#96; int(11) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  &#96;book_path&#96; varchar(255) NOT NULL,</span><br><span class="line">  &#96;status&#96; tinyint(4) NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;0---不成功，1---成功&#39;,</span><br><span class="line">  &#96;created_at&#96; int(11) NOT NULL,</span><br><span class="line">  PRIMARY KEY (&#96;id&#96;)</span><br><span class="line">) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;476 DEFAULT CHARSET&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">SET FOREIGN_KEY_CHECKS &#x3D; 1;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2，执行脚本"><a href="#2，执行脚本" class="headerlink" title="2，执行脚本"></a>2，执行脚本</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">    $dbhost = <span class="string">'""'</span>;            <span class="comment">//数据库地址</span></span><br><span class="line">    $dbuser = <span class="string">'***'</span>;            <span class="comment">// 用户名</span></span><br><span class="line">    $dbpw = <span class="string">'***'</span>;                <span class="comment">// 密码</span></span><br><span class="line">    $dbname = <span class="string">'***'</span>;            <span class="comment">// 数据库名</span></span><br><span class="line">    $pconnect = <span class="number">0</span>;                <span class="comment">// 连接数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require_once</span> <span class="string">'./db/db_mysql.class.php'</span>;</span><br><span class="line">$db = <span class="keyword">new</span> dbstuff;</span><br><span class="line">$db-&gt;connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect);</span><br><span class="line">$db-&gt;setcharset(<span class="string">"utf-8"</span>);</span><br><span class="line">$dbuser = $dbpw = $dbname = $pconnect = <span class="keyword">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_book_status</span><span class="params">($bookpath)</span></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $db;</span><br><span class="line">    $query = $db-&gt;query(<span class="string">"insert into s3_upload (book_path, status, created_at) values('"</span>.$bookpath.<span class="string">"',1, "</span>.time().<span class="string">")"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_book_status</span><span class="params">($bookpath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $db;</span><br><span class="line">    $result = <span class="keyword">array</span>();</span><br><span class="line">    $sql = <span class="string">"SELECT * FROM  s3_upload  WHERE book_path = '$bookpath' and status =1 "</span>;</span><br><span class="line">    $query = $db-&gt;query($sql);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> ( ($row = $db-&gt;fetch_array($query )) !== <span class="keyword">false</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        $result[] = $row;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(count($result))</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;    </span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">'vendor/autoload.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Aws</span>\<span class="title">S3</span>\<span class="title">S3Client</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Aws</span>\<span class="title">S3</span>\<span class="title">Exception</span>\<span class="title">S3Exception</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$s3 = S3Client::factory(<span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'region'</span> =&gt; <span class="string">'us-east-1'</span>, <span class="comment">//i.e.: 'us-east-1'</span></span><br><span class="line">            <span class="string">'version'</span> =&gt; <span class="string">'2006-03-01'</span>, <span class="comment">//i.e.: 'latest'</span></span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContent</span><span class="params">($path)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">      $arr[] = $value;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> $arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//--------------------------------获取书本内的文件名------start</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">searchDir</span><span class="params">($path,&amp;$files)</span></span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span>(is_dir($path))&#123;</span><br><span class="line"> </span><br><span class="line">    $opendir = opendir($path);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> ($file = readdir($opendir))&#123;</span><br><span class="line">      <span class="keyword">if</span>($file != <span class="string">'.'</span> &amp;&amp; $file != <span class="string">'..'</span>)&#123;</span><br><span class="line">        searchDir($path.<span class="string">'/'</span>.$file, $files);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    closedir($opendir);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    $files[] = $path;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//得到目录名</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDir</span><span class="params">($dir)</span></span>&#123;</span><br><span class="line">  $files = <span class="keyword">array</span>();</span><br><span class="line">  searchDir($dir, $files);</span><br><span class="line">  <span class="keyword">return</span> $files;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* $filenames = getDir('/srv/www/api.1stflip.com/public_html/trbooks/dqda/36id/');</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">foreach ($filenames as $value)&#123;</span></span><br><span class="line"><span class="comment">  echo $value."\r\n";</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line"><span class="comment">//-----------------------------获取书本内文件名----------end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$rootPath = <span class="string">"/srv/www/api.1stflip.com/public_html/trbooks/"</span>;</span><br><span class="line">$bookpath = <span class="string">"drre/39v3/"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContentCicle</span><span class="params">($path,$flag=false)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">        $temp  = $path.$value;</span><br><span class="line">        <span class="keyword">if</span>(!is_dir($temp))&#123;</span><br><span class="line">                <span class="comment">//echo $temp."\r\n";</span></span><br><span class="line">		<span class="keyword">global</span> $s3, $rootPath;</span><br><span class="line">		$str = str_replace($rootPath,<span class="string">""</span>,$temp);</span><br><span class="line">		<span class="comment">//echo $str."\r\n";</span></span><br><span class="line">		$s3res = $s3-&gt;doesObjectExist(<span class="string">"online.1stflip.com"</span>,$str);</span><br><span class="line">		<span class="keyword">if</span>(!$s3res)&#123;</span><br><span class="line">			<span class="keyword">echo</span> $str.<span class="string">"---uploading"</span>.<span class="string">"\r\n"</span>;</span><br><span class="line">			$s3-&gt;upload(<span class="string">"online.1stflip.com"</span>,$str,$temp);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">echo</span> $str.<span class="string">"---existed"</span>.<span class="string">"\r\n"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        getDirContentCicle($temp.<span class="string">'/'</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//----------获取用户书包目录---------start</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContent3</span><span class="params">($path,$resFlag=false)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">      <span class="keyword">if</span>($resFlag)&#123;</span><br><span class="line">        $bookpath = $path.$value;</span><br><span class="line">        <span class="keyword">if</span>($bookpath &amp;&amp; is_dir($bookpath))&#123;</span><br><span class="line">            <span class="keyword">echo</span> $bookpath.<span class="string">"\r\n"</span>;</span><br><span class="line">	    $bookstatus = get_book_status($bookpath);</span><br><span class="line">	    <span class="keyword">if</span>(!$bookstatus)&#123;</span><br><span class="line">	      getDirContentCicle($bookpath.<span class="string">'/'</span>);</span><br><span class="line">	      set_book_status($bookpath);</span><br><span class="line"></span><br><span class="line"> 	    &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirContent2</span><span class="params">($path)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!is_dir($path))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $arr = <span class="keyword">array</span>();</span><br><span class="line">  $data = scandir($path);</span><br><span class="line">  <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $value)&#123;</span><br><span class="line">    <span class="keyword">if</span>($value != <span class="string">'.'</span> &amp;&amp; $value != <span class="string">'..'</span>)&#123;</span><br><span class="line">      getDirContent3($path.$value.<span class="string">'/'</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//----------获取用户书包目录---------end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//getDirContentCicle($rootPath.$bookpath);</span></span><br><span class="line">getDirContent2($rootPath);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-备注"><a href="#3-备注" class="headerlink" title="3,备注"></a>3,备注</h1><p>aws s3 sdk 用的是2.8 版本</p>
+<p>php 版本号是5.3版本</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xingke.space/2020/04/28/native-to-aws-s3/" data-id="cl99dwd440012n83xbymh17vf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/s3/" rel="tag">s3</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/28/php-function/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          php 常用函数备注
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/27/lnmn/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ubuntu lnmn 安装</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person/" rel="tag">person</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-render/" rel="tag">react-render</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" rel="tag">垂直居中</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/ffmpeg/" style="font-size: 13.33px;">ffmpeg</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/person/" style="font-size: 13.33px;">person</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 13.33px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 16.67px;">webpack</a> <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" style="font-size: 10px;">垂直居中</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/26/2020-10-26-js/">js原型链及继承</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/23/2020-10-23-node/">node 12基本介绍(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/21/2020-10-21-node/">node 12基本介绍(-)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/20/2020-10-20-webpack/">webpack基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 xingke<br>
+      
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      
+        <a href="mailto:githubwu@163.com">githubwu@163.com</a>
+      
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

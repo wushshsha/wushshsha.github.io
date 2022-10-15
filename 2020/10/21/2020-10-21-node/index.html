@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164772977-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-164772977-1');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?dbf4881df63827ea4e908f54012fc622";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+        
+  
+  <title>node 12基本介绍(-) | 星客空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一，node是什么Node.js是一个开源、基于Chrome的V8 JavaScript引擎构建的JavaScript运行时。它在浏览器外部执行JavaScript代码。 二，依赖库及工具 依赖库 V8,  V8库为node.js提供了一个javascript引擎，node.js可以通过V8 C++ API对其进行控制。V8是有google来维护，并在chrome浏览器中使用。它是用来把javas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node 12基本介绍(-)">
+<meta property="og:url" content="https://xingke.space/2020/10/21/2020-10-21-node/index.html">
+<meta property="og:site_name" content="星客空间">
+<meta property="og:description" content="一，node是什么Node.js是一个开源、基于Chrome的V8 JavaScript引擎构建的JavaScript运行时。它在浏览器外部执行JavaScript代码。 二，依赖库及工具 依赖库 V8,  V8库为node.js提供了一个javascript引擎，node.js可以通过V8 C++ API对其进行控制。V8是有google来维护，并在chrome浏览器中使用。它是用来把javas">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-21T11:20:53.000Z">
+<meta property="article:modified_time" content="2022-10-15T03:29:59.499Z">
+<meta property="article:author" content="xingke">
+<meta property="article:tag" content="node">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="星客空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933655872655780"
+     crossorigin="anonymous"></script>
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">星客空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xingke.space"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2020-10-21-node" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/21/2020-10-21-node/" class="article-date">
+  <time datetime="2020-10-21T11:20:53.000Z" itemprop="datePublished">2020-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node 12基本介绍(-)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一，node是什么"><a href="#一，node是什么" class="headerlink" title="一，node是什么"></a>一，node是什么</h3><p>Node.js是一个开源、基于Chrome的V8 JavaScript引擎构建的JavaScript运行时。它在浏览器外部执行JavaScript代码。</p>
+<h3 id="二，依赖库及工具"><a href="#二，依赖库及工具" class="headerlink" title="二，依赖库及工具"></a>二，依赖库及工具</h3><ol>
+<li>依赖库<ol>
+<li>V8,  V8库为node.js提供了一个javascript引擎，node.js可以通过V8 C++ API对其进行控制。V8是有google来维护，并在chrome浏览器中使用。它是用来把javascript语言转换为机器码，极大运行效率。</li>
+<li>libuv，这是一个C库，用于将非阻塞I / O操作抽象为所有受支持平台之间的一致接口。它提供了处理文件系统，DNS，网络，子进程，管道，信号处理，轮询和流传输的机制。它还包括一个线程池，用于分担某些无法在操作系统级别异步完成的工作。</li>
+<li>llhttp，是一个有轻量的typescript 和C语言库实现的http解析器，它不会进行任何系统调度和分配，因此它的每个请求占用内存很小。</li>
+<li>c-ares，对于某些异步dns请求，node.js使用了C语言实现的c-ares库。</li>
+<li>openssl，OpenSSL在tls和crypto模块中广泛使用。它提供了经过考验的许多加密功能的实现，现代网络依靠这些功能来确保安全性。</li>
+<li>zlib，为了实现快速压缩和解压缩，Node.js依赖于行业标准的zlib库，该库也因在gzip和libpng中的使用而闻名。 Node.js使用zlib创建同步，异步以及流式压缩和解压缩接口。</li>
+</ol>
+</li>
+<li>工具<ol>
+<li>npm， node.js库管理工具， Node.js全部与模块化有关，随之而来的是对质量软件包管理器的需求。为此制作了npm。 npm附带了所有编程生态系统中社区创建的软件包的最大选择，这使得构建Node.js应用程序变得快速，容易。</li>
+<li>gyp，生成系统由gyp处理，gyp是从V8复制的基于python的项目生成器。主要用来编译代码库。</li>
+<li>gtest，可以使用来自Chromium的gtest测试本机代码。</li>
+</ol>
+</li>
+</ol>
+<h3 id="三，基本功能模块"><a href="#三，基本功能模块" class="headerlink" title="三，基本功能模块"></a>三，基本功能模块</h3><ol>
+<li><p>assert，断言模块，提供了一组断言函数，用于验证不变量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">'assert'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>async hooks，异步钩子，提供了一些 API 用于跟踪 NodeJs 中的异步资源的生命周期。在异步调用中我们很难正确的追踪异步调用的处理逻辑及关系，因此该模块就可以帮助处理逻辑流程</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> async_hooks = <span class="built_in">require</span>(<span class="string">'async_hooks'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Buffer，缓冲器，缓冲区对象用于表示固定长度的字节序列。许多Node.js API支持缓冲区。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf2 = Buffer.alloc(<span class="number">10</span>, <span class="number">1</span>);<span class="comment">//创建长度为10的1填充缓冲区</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C++ addons，C++插件，插件是用C ++编写的动态链接的共享对象。 require（）函数可以将加载项作为普通的Node.js模块加载。插件提供JavaScript和C / C ++库之间的接口。</p>
+</li>
+<li><p>N-API，是用于构建本机插件的API。它独立于底层JavaScript运行时（例如V8），并作为Node.js本身的一部分进行维护。该API将是跨Node.js版本稳定的应用程序二进制接口（ABI）。旨在使Addons与基础JavaScript引擎的更改保持隔离，并使为一个主要版本编译的模块可以在Node.js的更高主要版本上运行，而无需重新编译。</p>
+</li>
+<li><p>C++ Embedder API，Node.js提供了许多C ++ API，可用于从其他C ++软件在Node.js环境中执行JavaScript。这些API的文档可以在Node.js源代码树的</p>
+<p>src / node.h中找到。</p>
+</li>
+<li><p>Child Processes，提供了以类似于popen但不相同的方式生成子进程的功能。此功能主要由child_process.spawn（）函数提供</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"><span class="keyword">const</span> ls = spawn(<span class="string">'ls'</span>, [<span class="string">'-lh'</span>, <span class="string">'/usr'</span>]);</span><br><span class="line"></span><br><span class="line">ls.stdout.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`stdout: <span class="subst">$&#123;data&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">ls.stderr.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">`stderr: <span class="subst">$&#123;data&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">ls.on(<span class="string">'close'</span>, (code) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`child process exited with code <span class="subst">$&#123;code&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cluster， 集群，Node.js的单个实例在单个线程中运行。为了利用多核系统，用户有时会希望启动Node.js进程集群来处理负载。</p>
+<p>群集模块允许轻松创建所有共享服务器端口的子进程。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cluster = <span class="built_in">require</span>(<span class="string">'cluster'</span>);</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> numCPUs = <span class="built_in">require</span>(<span class="string">'os'</span>).cpus().length;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cluster.isMaster) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Master <span class="subst">$&#123;process.pid&#125;</span> is running`</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Fork workers.</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; numCPUs; i++) &#123;</span><br><span class="line">    cluster.fork();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  cluster.on(<span class="string">'exit'</span>, (worker, code, signal) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`worker <span class="subst">$&#123;worker.process.pid&#125;</span> died`</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// Workers can share any TCP connection</span></span><br><span class="line">  <span class="comment">// In this case it is an HTTP server</span></span><br><span class="line">  http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>);</span><br><span class="line">    res.end(<span class="string">'hello world\n'</span>);</span><br><span class="line">  &#125;).listen(<span class="number">8000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Worker <span class="subst">$&#123;process.pid&#125;</span> started`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xingke.space/2020/10/21/2020-10-21-node/" data-id="cl99dwd3w000en83xaf7weyoa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/23/2020-10-23-node/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          node 12基本介绍(二)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/20/2020-10-20-webpack/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack基本使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/" rel="tag">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openresty/" rel="tag">openresty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paypal/" rel="tag">paypal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person/" rel="tag">person</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-hook/" rel="tag">react-hook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-render/" rel="tag">react-render</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/s3/" rel="tag">s3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tsconfig/" rel="tag">tsconfig</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" rel="tag">垂直居中</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 10px;">docker-compose</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/ffmpeg/" style="font-size: 13.33px;">ffmpeg</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/openresty/" style="font-size: 10px;">openresty</a> <a href="/tags/paypal/" style="font-size: 10px;">paypal</a> <a href="/tags/person/" style="font-size: 13.33px;">person</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/react/" style="font-size: 20px;">react</a> <a href="/tags/react-hook/" style="font-size: 10px;">react-hook</a> <a href="/tags/react-render/" style="font-size: 10px;">react-render</a> <a href="/tags/s3/" style="font-size: 10px;">s3</a> <a href="/tags/ts/" style="font-size: 13.33px;">ts</a> <a href="/tags/tsconfig/" style="font-size: 10px;">tsconfig</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/webpack/" style="font-size: 16.67px;">webpack</a> <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" style="font-size: 10px;">垂直居中</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/26/2020-10-26-js/">js原型链及继承</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/23/2020-10-23-node/">node 12基本介绍(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/21/2020-10-21-node/">node 12基本介绍(-)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/20/2020-10-20-webpack/">webpack基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 xingke<br>
+      
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      
+        <a href="mailto:githubwu@163.com">githubwu@163.com</a>
+      
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
